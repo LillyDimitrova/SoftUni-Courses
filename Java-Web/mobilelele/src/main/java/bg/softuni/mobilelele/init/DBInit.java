@@ -4,6 +4,7 @@ import bg.softuni.mobilelele.model.entity.BrandEntity;
 import bg.softuni.mobilelele.model.entity.ModelEntity;
 import bg.softuni.mobilelele.model.entity.enums.CategoryEnum;
 import bg.softuni.mobilelele.repository.BrandRepository;
+import bg.softuni.mobilelele.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -12,10 +13,12 @@ import java.util.List;
 @Component
 public class DBInit implements CommandLineRunner {
 
-    private BrandRepository brandRepository;
+    private final BrandRepository brandRepository;
+    private final UserRepository userRepository;
 
-    public DBInit(BrandRepository brandRepository) {
+    public DBInit(BrandRepository brandRepository, UserRepository userRepository) {
         this.brandRepository = brandRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
