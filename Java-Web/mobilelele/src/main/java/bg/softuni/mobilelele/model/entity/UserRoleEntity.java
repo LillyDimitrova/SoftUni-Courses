@@ -1,13 +1,16 @@
 package bg.softuni.mobilelele.model.entity;
 
-import bg.softuni.mobilelele.model.entity.enums.UserRoleEnum;
+import bg.softuni.mobilelele.model.enums.UserRoleEnum;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "roles")
-public class UserRoleEntity extends BaseEntity{
+public class UserRoleEntity{
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private UserRoleEnum role;
@@ -18,6 +21,15 @@ public class UserRoleEntity extends BaseEntity{
 
     public UserRoleEntity setRole(UserRoleEnum role) {
         this.role = role;
+        return this;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public UserRoleEntity setId(Long id) {
+        this.id = id;
         return this;
     }
 }

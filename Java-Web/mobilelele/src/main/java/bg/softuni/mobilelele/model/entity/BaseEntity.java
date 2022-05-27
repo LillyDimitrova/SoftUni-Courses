@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.time.Instant;
 
 @MappedSuperclass
-public class BaseEntity {
+public class    BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,5 +45,10 @@ public class BaseEntity {
     @PrePersist
     public void beforeCreate() {
         this.created = Instant.now();
+    }
+
+    @PostPersist
+    public void onUpdate() {
+        this.modified = Instant.now();
     }
 }
