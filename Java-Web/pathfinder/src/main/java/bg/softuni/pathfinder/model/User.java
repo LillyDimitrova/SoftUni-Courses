@@ -8,7 +8,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class BaseUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,10 +20,10 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false, unique = true)
+    @Column(unique = true)
     private String email;
 
-    @Column(name = "fullname")
+    @Column(name = "full_name")
     private String fullName;
 
     private int age;
@@ -34,7 +34,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Level level;
 
-    public User() {
+    public BaseUser() {
         this.roles = new HashSet<>();
     }
 
@@ -42,7 +42,7 @@ public class User {
         return id;
     }
 
-    public User setId(Long id) {
+    public BaseUser setId(Long id) {
         this.id = id;
         return this;
     }
@@ -51,7 +51,7 @@ public class User {
         return username;
     }
 
-    public User setUsername(String username) {
+    public BaseUser setUsername(String username) {
         this.username = username;
         return this;
     }
@@ -60,7 +60,7 @@ public class User {
         return password;
     }
 
-    public User setPassword(String password) {
+    public BaseUser setPassword(String password) {
         this.password = password;
         return this;
     }
@@ -69,7 +69,7 @@ public class User {
         return email;
     }
 
-    public User setEmail(String email) {
+    public BaseUser setEmail(String email) {
         this.email = email;
         return this;
     }
@@ -78,7 +78,7 @@ public class User {
         return roles;
     }
 
-    public User setRoles(Set<Role> roles) {
+    public BaseUser setRoles(Set<Role> roles) {
         this.roles = roles;
         return this;
     }
@@ -87,7 +87,7 @@ public class User {
         return level;
     }
 
-    public User setLevel(Level level) {
+    public BaseUser setLevel(Level level) {
         this.level = level;
         return this;
     }
