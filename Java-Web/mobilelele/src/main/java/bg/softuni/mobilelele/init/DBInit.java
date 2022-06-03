@@ -2,10 +2,10 @@ package bg.softuni.mobilelele.init;
 
 import bg.softuni.mobilelele.model.entity.BrandEntity;
 import bg.softuni.mobilelele.model.entity.ModelEntity;
-import bg.softuni.mobilelele.model.entity.UserEntity;
 import bg.softuni.mobilelele.model.enums.CategoryEnum;
 import bg.softuni.mobilelele.repository.BrandRepository;
 import bg.softuni.mobilelele.repository.UserRepository;
+import bg.softuni.mobilelele.service.impl.UserServiceImpl;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -18,31 +18,22 @@ public class DBInit implements CommandLineRunner {
     private final BrandRepository brandRepository;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private UserServiceImpl userService;
 
-    public DBInit(BrandRepository brandRepository, UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public DBInit(BrandRepository brandRepository, UserRepository userRepository, PasswordEncoder passwordEncoder, UserServiceImpl userService) {
         this.brandRepository = brandRepository;
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.userService = userService;
     }
 
     @Override
     public void run(String... args) {
         initializeBrandAndModels();
-        initializeUsers();
+        userService.initializeUsersAndRoles();
 
     }
-    private void initializeUsers() {
-        if (userRepository.count() == 0) {
-            UserEntity admin = new UserEntity();
-            admin.setActive(true)
-                    .setUsername("admin")
-                    .setFirstName("Admin")
-                    .setLastName("Adminov")
-                    .setPassword(passwordEncoder.encode("test"));
 
-            userRepository.save(admin);
-        }
-    }
     private void initializeBrandAndModels() {
         if(brandRepository.count() == 0) {
             BrandEntity ford = new BrandEntity().setName("Ford");
