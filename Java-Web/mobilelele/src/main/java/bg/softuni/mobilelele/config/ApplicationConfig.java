@@ -6,7 +6,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 
 @Configuration
-public class AplicationConfig {
+public class ApplicationConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
