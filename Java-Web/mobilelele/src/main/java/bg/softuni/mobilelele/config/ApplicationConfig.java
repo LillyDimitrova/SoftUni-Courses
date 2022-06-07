@@ -12,4 +12,9 @@ public class ApplicationConfig {
     public PasswordEncoder passwordEncoder() {
         return new Pbkdf2PasswordEncoder();
     }
+    
+//    @Bean
+//    public ModelMapper modelMapper() {
+//        return new ModelMapper;
+//    }
 }
