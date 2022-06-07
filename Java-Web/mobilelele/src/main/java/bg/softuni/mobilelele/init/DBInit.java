@@ -19,8 +19,8 @@ public class DBInit implements CommandLineRunner {
     private final BrandRepository brandRepository;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    private UserServiceImpl userService;
-    private OfferService offerService;
+    private final UserServiceImpl userService;
+    private final OfferService offerService;
 
     public DBInit(BrandRepository brandRepository, UserRepository userRepository, PasswordEncoder passwordEncoder, UserServiceImpl userService, OfferService offerService) {
         this.brandRepository = brandRepository;
