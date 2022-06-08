@@ -1,7 +1,7 @@
 package bg.softuni.mobilelele.model.view;
 
-import bg.softuni.mobilelele.model.enums.EngineEnum;
-import bg.softuni.mobilelele.model.enums.TransmissionEnum;
+import bg.softuni.mobilelele.model.entity.enums.EngineEnum;
+import bg.softuni.mobilelele.model.entity.enums.TransmissionEnum;
 
 public class OfferSummaryView {
 

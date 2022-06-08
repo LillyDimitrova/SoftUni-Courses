@@ -2,11 +2,11 @@ package bg.softuni.mobilelele.init;
 
 import bg.softuni.mobilelele.model.entity.BrandEntity;
 import bg.softuni.mobilelele.model.entity.ModelEntity;
-import bg.softuni.mobilelele.model.enums.CategoryEnum;
+import bg.softuni.mobilelele.model.entity.enums.CategoryEnum;
 import bg.softuni.mobilelele.repository.BrandRepository;
 import bg.softuni.mobilelele.repository.UserRepository;
 import bg.softuni.mobilelele.service.OfferService;
-import bg.softuni.mobilelele.service.impl.UserServiceImpl;
+import bg.softuni.mobilelele.service.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -19,10 +19,10 @@ public class DBInit implements CommandLineRunner {
     private final BrandRepository brandRepository;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    private final UserServiceImpl userService;
+    private final UserService userService;
     private final OfferService offerService;
 
-    public DBInit(BrandRepository brandRepository, UserRepository userRepository, PasswordEncoder passwordEncoder, UserServiceImpl userService, OfferService offerService) {
+    public DBInit(BrandRepository brandRepository, UserRepository userRepository, PasswordEncoder passwordEncoder, UserService userService, OfferService offerService) {
         this.brandRepository = brandRepository;
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
@@ -33,8 +33,8 @@ public class DBInit implements CommandLineRunner {
     @Override
     public void run(String... args) {
         initializeBrandAndModels();
-        userService.initializeUsersAndRoles();
-        offerService.initializeOffers();
+        //userService.initializeUsersAndRoles();
+       // offerService.initializeOffers();
 
 
     }

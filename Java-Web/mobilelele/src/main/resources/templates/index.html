@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -14,17 +13,29 @@
 
 <body>
 
-<div th:replace="fragments/navbar :: navbar">
-    Navbar
-</div>
+<div th:replace="fragments/navbar">Navbar</div>
 
 
 <div class="container-fluid">
-    <h5 class="text-center text-white mt-5">Welcome to MobiLeLeLe,
-     <span th:if="${@currentUser.isLoggedIn()}" th:text="${@currentUser.userName}"></span>
-        <span th:unless="${@currentUser.isLoggedIn()}"> Anonymous</span>!
+    <h5 class="text-center text-white mt-5">
+        Welcome to MobiLeLeLe,
+        <span th:if="${@currentUser.isLoggedIn()}"
+              th:text="${@currentUser.getName()}">
+        </span>
+
+        <span th:if="${@currentUser.isAnonymous()}">
+            Anonymous!
+        </span>
     </h5>
 </div>
+
+<div>
+    <footer> </footer>
+</div>
+
+</body>
+</html>
+
 
 <div>
     <footer> </footer>

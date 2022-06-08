@@ -1,24 +1,40 @@
 package bg.softuni.mobilelele.model.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "users")
 public class UserEntity extends BaseEntity{
 
-    @Column(nullable = false, unique = true)
-    private String username;
+
+    @Column(nullable = false,
+            unique = true)
+    private String email;
 
     private String password;
-
+    @Column(nullable = false)
     private String firstName;
+    @Column(nullable = false)
     private String lastName;
     private boolean isActive;
+    private String imageUrl;
+
 
     @ManyToMany(fetch = FetchType.EAGER)
-    private Set<UserRoleEntity> roles = new HashSet<>();
+    private List<UserRoleEntity> userRoles = new ArrayList<>();
+
+    public String getEmail() {
+        return email;
+    }
+
+    public UserEntity setEmail(String email) {
+        this.email = email;
+        return this;
+    }
 
     public String getPassword() {
         return password;
@@ -26,15 +42,6 @@ public class UserEntity extends BaseEntity{
 
     public UserEntity setPassword(String password) {
         this.password = password;
-        return this;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public UserEntity setUsername(String username) {
-        this.username = username;
         return this;
     }
 
@@ -65,12 +72,39 @@ public class UserEntity extends BaseEntity{
         return this;
     }
 
-    public Set<UserRoleEntity> getRoles() {
-        return roles;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public UserEntity setRoles(Set<UserRoleEntity> roles) {
-        this.roles = roles;
+    public UserEntity setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
         return this;
+    }
+
+    public List<UserRoleEntity> getUserRoles() {
+        return userRoles;
+    }
+
+    public UserEntity setUserRoles(List<UserRoleEntity> userRoles) {
+        this.userRoles = userRoles;
+        return this;
+    }
+
+    public UserEntity addRole(UserRoleEntity userRole) {
+        this.userRoles.add(userRole);
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        return "UserEntity{" +
+                "email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", isActive=" + isActive +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", userRoles=" + userRoles +
+                '}';
     }
 }
