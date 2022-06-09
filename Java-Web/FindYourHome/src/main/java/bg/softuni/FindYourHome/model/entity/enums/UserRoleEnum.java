@@ -1,4 +1,4 @@
-package bg.softuni.FindYourHome.model.enums;
+package bg.softuni.FindYourHome.model.entity.enums;
 
 public enum UserRoleEnum {
 

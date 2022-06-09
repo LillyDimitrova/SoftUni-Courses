@@ -1,6 +1,6 @@
 package bg.softuni.FindYourHome.user;
 
-import bg.softuni.FindYourHome.model.enums.UserRoleEnum;
+import bg.softuni.FindYourHome.model.entity.enums.UserRoleEnum;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
@@ -11,63 +11,29 @@ import java.util.Set;
 @SessionScope
 public class CurrentUser {
 
-    private boolean isLoggedIn;
-    private String userName;
-    private String firstName;
-    private String lastName;
-    private Set<UserRoleEnum> roles = new HashSet<>();
+    private boolean loggedIn;
+    private String name;
 
     public boolean isLoggedIn() {
-        return isLoggedIn;
+        return loggedIn;
     }
 
     public CurrentUser setLoggedIn(boolean loggedIn) {
-        isLoggedIn = loggedIn;
+        this.loggedIn = loggedIn;
         return this;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getName() {
+        return name;
     }
 
-    public CurrentUser setUserName(String userName) {
-        this.userName = userName;
+    public CurrentUser setName(String name) {
+        this.name = name;
         return this;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public CurrentUser setFirstName(String firstName) {
-        this.firstName = firstName;
-        return this;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public CurrentUser setLastName(String lastName) {
-        this.lastName = lastName;
-        return this;
-    }
-
-    public CurrentUser addRole(UserRoleEnum role) {
-        roles.add(role);
-        return this;
-    }
-
-    public CurrentUser clearRoles() {
-        roles.clear();
-        return this;
-    }
-    public boolean isAdmin() {
-        return roles.contains(UserRoleEnum.ADMIN);
-    }
-
-    public void clean() {
-        setLoggedIn(false).setUserName(null).setFirstName(null).setLastName(null)
-                .clearRoles();
+    public void clear() {
+        loggedIn = false;
+        name = null;
     }
 }

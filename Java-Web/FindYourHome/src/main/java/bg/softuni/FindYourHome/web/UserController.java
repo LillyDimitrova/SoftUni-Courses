@@ -1,6 +1,7 @@
 package bg.softuni.FindYourHome.web;
 
-import bg.softuni.FindYourHome.service.Impl.UserServiceImpl;
+import bg.softuni.FindYourHome.model.dto.UserLoginDTO;
+import bg.softuni.FindYourHome.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/users")
 public class UserController {
 
-    private UserServiceImpl userService;
+    private UserService userService;
 
-    public UserController(UserServiceImpl userService) {
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 
@@ -27,9 +28,9 @@ public class UserController {
         return "redirect:/";
     }
 
-//    @PostMapping("/login")
-//    public String login(UserLoginDTO userLoginDTO) {
-//        userService.login(userLoginDTO);
-//        return "redirect:/";
-//    }
+    @PostMapping("/login")
+    public String login(UserLoginDTO userLoginDTO) {
+        userService.login(userLoginDTO);
+        return "redirect:/";
+    }
 }

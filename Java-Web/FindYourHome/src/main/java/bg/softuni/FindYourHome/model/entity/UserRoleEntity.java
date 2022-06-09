@@ -1,6 +1,6 @@
 package bg.softuni.FindYourHome.model.entity;
 
-import bg.softuni.FindYourHome.model.enums.UserRoleEnum;
+import bg.softuni.FindYourHome.model.entity.enums.UserRoleEnum;
 
 import javax.persistence.*;
 

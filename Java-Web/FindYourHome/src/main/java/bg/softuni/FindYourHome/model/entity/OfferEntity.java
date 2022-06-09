@@ -1,6 +1,6 @@
 package bg.softuni.FindYourHome.model.entity;
 
-import bg.softuni.FindYourHome.model.enums.CategoryEnum;
+import bg.softuni.FindYourHome.model.entity.enums.CategoryEnum;
 
 import javax.persistence.*;
 

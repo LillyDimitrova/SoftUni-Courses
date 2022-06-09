@@ -1,31 +1,35 @@
 package bg.softuni.FindYourHome.model.entity;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
 public class UserEntity extends BaseEntity{
 
     @Column(nullable = false, unique = true)
-    private String username;
+    private String email;
 
     private String password;
 
+    @Column(nullable = false)
     private String firstName;
+    @Column(nullable = false)
     private String lastName;
     private boolean isActive;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    private Set<UserRoleEntity> roles = new HashSet<>();
+    private String imageUrl;
 
-    public String getUsername() {
-        return username;
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<UserRoleEntity> userRoles = new ArrayList<>();
+
+    public String getEmail() {
+        return email;
     }
 
-    public UserEntity setUsername(String username) {
-        this.username = username;
+    public UserEntity setEmail(String email) {
+        this.email = email;
         return this;
     }
 
@@ -65,12 +69,30 @@ public class UserEntity extends BaseEntity{
         return this;
     }
 
-    public Set<UserRoleEntity> getRoles() {
-        return roles;
+    public List<UserRoleEntity> getUserRoles() {
+        return userRoles;
     }
 
-    public UserEntity setRoles(Set<UserRoleEntity> roles) {
-        this.roles = roles;
+    public UserEntity setUserRoles(List <UserRoleEntity> userRoles) {
+        this.userRoles = userRoles;
         return this;
+    }
+
+    public UserEntity addRole(UserRoleEntity userRole) {
+        this.userRoles.add(userRole);
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        return "UserEntity{" +
+                "email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", isActive=" + isActive +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", userRoles=" + userRoles +
+                '}';
     }
 }

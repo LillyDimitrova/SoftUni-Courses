@@ -1,6 +1,7 @@
 package bg.softuni.FindYourHome.service;
 
-public interface HouseService {
+import org.springframework.stereotype.Service;
 
-    void initializeTypeHouse();
+@Service
+public class HouseService {
 }
