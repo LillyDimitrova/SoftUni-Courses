@@ -1,6 +1,6 @@
 package com.example.pathfinder.model.entity;
 
-import com.example.pathfinder.model.enums.UserRoleEnum;
+import com.example.pathfinder.model.entity.enums.UserRoleEnum;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;

@@ -1,6 +1,6 @@
 package com.example.pathfinder.model.entity;
 
-import com.example.pathfinder.model.enums.CategoriesEnum;
+import com.example.pathfinder.model.entity.enums.CategoriesEnum;
 
 import javax.persistence.*;
 

@@ -1,6 +1,6 @@
 package com.example.pathfinder.model.entity;
 
-import com.example.pathfinder.model.enums.LevelEnum;
+import com.example.pathfinder.model.entity.enums.LevelEnum;
 
 import javax.persistence.*;
 import java.util.Set;
