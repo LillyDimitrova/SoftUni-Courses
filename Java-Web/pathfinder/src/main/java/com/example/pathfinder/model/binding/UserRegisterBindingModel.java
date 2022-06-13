@@ -3,21 +3,20 @@ package com.example.pathfinder.model.binding;
 import javax.validation.constraints.Min;
 
 public class UserRegisterBindingModel {
-
     private String username;
     private String fullName;
     private String email;
-    @Min(10)
     private Integer age;
     private String password;
     private String confirmPassword;
 
-    public UserRegisterBindingModel() {
-    }
+//    public UserRegisterBindingModel() {
+//    }
 
     public String getUsername() {
         return username;
     }
+
 
     public void setUsername(String username) {
         this.username = username;
@@ -39,6 +38,7 @@ public class UserRegisterBindingModel {
         this.email = email;
     }
 
+    @Min(10)
     public Integer getAge() {
         return age;
     }
