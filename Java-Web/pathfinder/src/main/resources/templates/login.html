@@ -26,8 +26,8 @@
             <!--/*@thymesVar id="userLoginBindingModel" type="templates"*/-->
             <form
                     th:object="${userLoginBindingModel}"
-                    th:action="/"
-                    method="">
+                    th:action="@{/users/login}"
+                    method="post">
                 <div>
                     <!--/*@thymesVar id="isExists" type="templates"*/-->
                     <h5 th:if="${!isExists}" class="bg-danger">Incorrect username or password</h5>
@@ -36,7 +36,7 @@
                     </div>
                     <div class="col-auto">
                         <input type="text"
-                               name="username"
+                               th:field="*{username}"
                                required minlength="4" maxlength="20"
                                id="inputUsername"
                                class="form-control"
@@ -49,7 +49,7 @@
                     </div>
                     <div class="col-auto">
                         <input type="password"
-                               name="password"
+                               th:field="*{password}"
                                required minlength="4" maxlength="20"
                                id="inputPassword" class="form-control"
                                aria-describedby="passwordHelpInline">
