@@ -14,7 +14,7 @@ import javax.validation.Valid;
 @Controller
 public class OfferController {
 
-    private OfferService offerService;
+    private final OfferService offerService;
 
     public OfferController(OfferService offerService) {
         this.offerService = offerService;

@@ -1,6 +1,7 @@
 package bg.softuni.mobilelele.service;
 
 import bg.softuni.mobilelele.model.dto.AddOfferDTO;
+import bg.softuni.mobilelele.model.dto.BrandDTO;
 import bg.softuni.mobilelele.model.entity.OfferEntity;
 import bg.softuni.mobilelele.model.view.OfferSummaryView;
 import bg.softuni.mobilelele.repository.OfferRepository;
@@ -32,6 +33,10 @@ public class OfferService {
         return new OfferSummaryView();
     }
     public void addOffer(AddOfferDTO addOfferDTO) {
+        //TODO
+    }
+
+    public List<BrandDTO> getAllBrands() {
         //TODO
     }
 }
