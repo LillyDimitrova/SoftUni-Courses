@@ -1,5 +1,6 @@
 package bg.softuni.mobilelele.service;
 
+import bg.softuni.mobilelele.model.dto.AddOfferDTO;
 import bg.softuni.mobilelele.model.entity.OfferEntity;
 import bg.softuni.mobilelele.model.view.OfferSummaryView;
 import bg.softuni.mobilelele.repository.OfferRepository;
@@ -29,5 +30,8 @@ public class OfferService {
     private OfferSummaryView map(OfferEntity offerEntity) {
         //TODO
         return new OfferSummaryView();
+    }
+    public void addOffer(AddOfferDTO addOfferDTO) {
+        //TODO
     }
 }
