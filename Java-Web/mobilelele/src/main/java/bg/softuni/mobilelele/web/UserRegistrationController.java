@@ -43,7 +43,7 @@ public class UserRegistrationController {
             return "redirect:/users/register";
         }
 
-        this.userService.registerAndLogin(userModel);
+        userService.registerAndLogin(userModel);
 
         return "redirect:/";
     }
