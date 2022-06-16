@@ -4,6 +4,7 @@ package bg.softuni.mobilelele.model.entity;
 import bg.softuni.mobilelele.model.enums.CategoryEnum;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "models")
@@ -21,7 +22,7 @@ public class ModelEntity extends BaseEntity {
 
     private int startYear;
 
-    private int endYear;
+    private Integer endYear;
 
     @ManyToOne
     private BrandEntity brand;
