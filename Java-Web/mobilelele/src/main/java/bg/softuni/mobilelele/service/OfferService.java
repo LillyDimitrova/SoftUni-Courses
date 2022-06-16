@@ -1,39 +1,47 @@
 package bg.softuni.mobilelele.service;
 
 import bg.softuni.mobilelele.model.dto.AddOfferDTO;
-import bg.softuni.mobilelele.model.dto.BrandDTO;
+import bg.softuni.mobilelele.model.entity.ModelEntity;
 import bg.softuni.mobilelele.model.entity.OfferEntity;
-import bg.softuni.mobilelele.model.view.OfferSummaryView;
+import bg.softuni.mobilelele.model.entity.UserEntity;
+import bg.softuni.mobilelele.model.mapper.OfferMapper;
+import bg.softuni.mobilelele.repository.ModelRepository;
 import bg.softuni.mobilelele.repository.OfferRepository;
+import bg.softuni.mobilelele.repository.UserRepository;
+import bg.softuni.mobilelele.user.CurrentUser;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class OfferService {
     private final OfferRepository offerRepository;
+    private final OfferMapper offerMapper;
+    private final UserRepository userRepository;
+    private final CurrentUser currentUser;
 
-    public OfferService(OfferRepository offerRepository) {
+    private final ModelRepository modelRepository;
+
+    public OfferService(OfferRepository offerRepository, OfferMapper offerMapper, UserRepository userRepository, CurrentUser currentUser, ModelRepository modelRepository) {
         this.offerRepository = offerRepository;
+        this.offerMapper = offerMapper;
+        this.userRepository = userRepository;
+        this.currentUser = currentUser;
+        this.modelRepository = modelRepository;
     }
-//
-//
-//    public void initializeOffers() {
-//        //TODO
-//    }
-//
-//
-//    public List<OfferSummaryView> getAllOffers() {
-//        return offerRepository.findAll().stream().map(this::map).collect(Collectors.toList());
-//    }
-//
-//    private OfferSummaryView map(OfferEntity offerEntity) {
-//        //TODO
-//        return new OfferSummaryView();
-//    }
+
     public void addOffer(AddOfferDTO addOfferDTO) {
+        OfferEntity newOffer = offerMapper.addOfferDtoToOfferEntity(addOfferDTO);
+
         //TODO
+
+       UserEntity seller  =  userRepository.findByEmail(currentUser.getEmail()).orElseThrow();
+
+        ModelEntity model = modelRepository.findById(addOfferDTO.getModelId()).orElseThrow();
+
+        newOffer.setModel(model);
+        newOffer.setSeller(seller);
+
+        offerRepository.save(newOffer);
     }
+
 
 }
