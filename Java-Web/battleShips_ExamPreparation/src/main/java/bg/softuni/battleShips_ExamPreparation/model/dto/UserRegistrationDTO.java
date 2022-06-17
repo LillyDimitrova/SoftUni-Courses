@@ -1,22 +1,28 @@
 package bg.softuni.battleShips_ExamPreparation.model.dto;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 public class UserRegistrationDTO {
 
     @Size(min = 3, max = 10)
+    @NotBlank
     private String username;
 
     @Size(min = 5, max = 20)
+    @NotBlank
     private String fullName;
 
     @Email
+    @NotBlank
     private String email;
     @Size(min = 3)
+    @NotBlank
     private String password;
 
     @Size(min = 3)
+    @NotBlank
     private String confirmPassword;
 
     public UserRegistrationDTO() {
@@ -65,5 +71,16 @@ public class UserRegistrationDTO {
     public UserRegistrationDTO setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return "UserRegistrationDTO{" +
+                "username='" + username + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", confirmPassword='" + confirmPassword + '\'' +
+                '}';
     }
 }
