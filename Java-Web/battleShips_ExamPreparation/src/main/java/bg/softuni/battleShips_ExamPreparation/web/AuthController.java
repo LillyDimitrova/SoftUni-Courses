@@ -1,6 +1,8 @@
 package bg.softuni.battleShips_ExamPreparation.web;
 
+import bg.softuni.battleShips_ExamPreparation.model.dto.UserLoginDTO;
 import bg.softuni.battleShips_ExamPreparation.model.dto.UserRegistrationDTO;
+import bg.softuni.battleShips_ExamPreparation.service.AuthService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,10 +14,20 @@ import javax.validation.Valid;
 
 @Controller
 public class AuthController {
+    private AuthService authService;
+
+    public AuthController(AuthService authService) {
+        this.authService = authService;
+    }
 
     @ModelAttribute("userRegistrationDTO")
     public UserRegistrationDTO initRegistrationDto() {
         return new UserRegistrationDTO();
+    }
+
+    @ModelAttribute("userLoginDTO")
+    public UserLoginDTO initLoginDto() {
+        return new UserLoginDTO();
     }
 
     @GetMapping("/register")
@@ -26,12 +38,28 @@ public class AuthController {
     @PostMapping("/register")
     public String register(@Valid UserRegistrationDTO userRegistrationDTO,
                            BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-        if (bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors() || !this.authService.register(userRegistrationDTO)) {
             redirectAttributes.addFlashAttribute("userRegistrationDTO", userRegistrationDTO).
                                addFlashAttribute("org.springframework.validation.BindingResult.userRegistrationDTO", bindingResult);
 
             return "redirect:/register";
         }
+        return "redirect:/login";
+    }
+
+    @GetMapping("/login")
+    public String login() {
         return "login";
+    }
+
+    @PostMapping("/login")
+    public String login(@Valid UserLoginDTO userLoginDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("userLoginDTO",
+                    userLoginDTO).addFlashAttribute("org.springframework.validation.BindingResult.userLoginDTO", bindingResult);
+            return "redirect:/login";
+        }
+        return "redirect:/home";
+
     }
 }
