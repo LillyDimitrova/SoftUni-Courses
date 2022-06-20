@@ -1,6 +1,6 @@
 package bg.softuni.battleShips_ExamPreparation.model.entity;
 
-import bg.softuni.battleShips_ExamPreparation.model.enums.CategoryEnum;
+import bg.softuni.battleShips_ExamPreparation.model.enums.ShipType;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,7 +13,7 @@ public class CategoryEntity extends BaseEntity{
 
     @Enumerated
     @Column(unique = true, nullable = false)
-    private CategoryEnum name;
+    private ShipType name;
 
     @Column(columnDefinition = "text")
     private String description;
@@ -22,11 +22,11 @@ public class CategoryEntity extends BaseEntity{
 
     }
 
-    public CategoryEnum getName() {
+    public ShipType getName() {
         return name;
     }
 
-    public CategoryEntity setName(CategoryEnum name) {
+    public CategoryEntity setName(ShipType name) {
         this.name = name;
         return this;
     }

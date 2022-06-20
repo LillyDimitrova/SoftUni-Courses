@@ -1,7 +1,7 @@
 package bg.softuni.battleShips_ExamPreparation.init;
 
 import bg.softuni.battleShips_ExamPreparation.model.entity.CategoryEntity;
-import bg.softuni.battleShips_ExamPreparation.model.enums.CategoryEnum;
+import bg.softuni.battleShips_ExamPreparation.model.enums.ShipType;
 import bg.softuni.battleShips_ExamPreparation.repository.CategoryRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -19,7 +19,7 @@ public class DBInit implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         if (categoryRepository.count() == 0) {
-            for (CategoryEnum c : CategoryEnum.values()) {
+            for (ShipType c : ShipType.values()) {
                 CategoryEntity entity = new CategoryEntity().setName(c);
                 categoryRepository.save(entity);
             }
