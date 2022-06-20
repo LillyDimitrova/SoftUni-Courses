@@ -1,8 +1,10 @@
 package bg.softuni.battleShips_ExamPreparation.service;
 
+import bg.softuni.battleShips_ExamPreparation.model.dto.UserLoginDTO;
 import bg.softuni.battleShips_ExamPreparation.model.dto.UserRegistrationDTO;
 import bg.softuni.battleShips_ExamPreparation.model.entity.UserEntity;
 import bg.softuni.battleShips_ExamPreparation.repository.UserRepository;
+import bg.softuni.battleShips_ExamPreparation.session.LoggedUser;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -11,9 +13,11 @@ import java.util.Optional;
 public class AuthService {
 
     private final UserRepository userRepository;
+    private LoggedUser loggedUser;
 
-    public AuthService(UserRepository userRepository) {
+    public AuthService(UserRepository userRepository, LoggedUser loggedUser) {
         this.userRepository = userRepository;
+        this.loggedUser = loggedUser;
     }
 
     public boolean register(UserRegistrationDTO userRegistrationDTO) {
@@ -37,6 +41,16 @@ public class AuthService {
             setPassword(userRegistrationDTO.getPassword()).
             setUsername(userRegistrationDTO.getUsername());
         userRepository.save(user);
+
+        return true;
+    }
+
+    public boolean login(UserLoginDTO userLoginDTO) {
+        Optional<UserEntity> user = userRepository.findByUsernameAndPassword(userLoginDTO.getUsername(), userLoginDTO.getPassword());
+        if (!user.isPresent()) {
+            return false;
+        }
+        this.loggedUser.login(user.get());
 
         return true;
     }

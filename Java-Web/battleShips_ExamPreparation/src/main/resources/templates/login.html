@@ -45,10 +45,10 @@
 
                     <form  th:action="@{/login}"
                            th:method="POST"
-                           th:object="${userloginDTO}"
+                           th:object="${userLoginDTO}"
                           class="text-center text-light">
                         <h3 class="mt-5 text-center">
-                            <strong class="rounded  pl-3 text-danger">Enter valid
+                            <strong th:if="${badCredentials}" class="rounded  pl-3 text-danger">Enter valid
                                 username and
                                 password</strong>
                         </h3>

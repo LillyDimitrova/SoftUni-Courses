@@ -1,8 +1,16 @@
 package bg.softuni.battleShips_ExamPreparation.model.dto;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 public class UserLoginDTO {
 
+    @Size(min = 3, max = 10)
+    @NotBlank
     private String username;
+
+    @NotBlank
+    @Size(min = 3)
     private String password;
 
     public UserLoginDTO() {
