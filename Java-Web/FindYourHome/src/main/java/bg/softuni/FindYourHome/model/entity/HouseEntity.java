@@ -1,26 +1,53 @@
 package bg.softuni.FindYourHome.model.entity;
 
-import bg.softuni.FindYourHome.model.entity.enums.CategoryEnum;
-import bg.softuni.FindYourHome.model.entity.enums.TypeEnum;
+import bg.softuni.FindYourHome.model.enums.CategoryEnum;
+import bg.softuni.FindYourHome.model.enums.TypeHouse;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "houses")
 public class HouseEntity extends BaseEntity{
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private TypeEnum type;
 
-    @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "TEXT")
+    private String description;
+
     @Column(nullable = false)
+    private BigDecimal price;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private CategoryEnum category;
 
     @Column(nullable = false)
-    private String imageUrl;
+    @Enumerated(EnumType.STRING)
+    private TypeHouse type;
 
     @Column(nullable = false)
-    private Integer yearOfConstruction;
+    private LocalDate yearOfConstruction;
+
+    public HouseEntity() {
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public HouseEntity setDescription(String description) {
+        this.description = description;
+        return this;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public HouseEntity setPrice(BigDecimal price) {
+        this.price = price;
+        return this;
+    }
 
     public CategoryEnum getCategory() {
         return category;
@@ -31,29 +58,20 @@ public class HouseEntity extends BaseEntity{
         return this;
     }
 
-    public TypeEnum getType() {
+    public TypeHouse getType() {
         return type;
     }
 
-    public HouseEntity setType(TypeEnum type) {
+    public HouseEntity setType(TypeHouse type) {
         this.type = type;
         return this;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public HouseEntity setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-        return this;
-    }
-
-    public Integer getYearOfConstruction() {
+    public LocalDate getYearOfConstruction() {
         return yearOfConstruction;
     }
 
-    public HouseEntity setYearOfConstruction(Integer yearOfConstruction) {
+    public HouseEntity setYearOfConstruction(LocalDate yearOfConstruction) {
         this.yearOfConstruction = yearOfConstruction;
         return this;
     }
