@@ -2,7 +2,7 @@ package bg.softuni.examprep_coffeeshop.web;
 
 import bg.softuni.examprep_coffeeshop.model.dtos.UserLoginDTO;
 import bg.softuni.examprep_coffeeshop.model.dtos.UserRegistrationDTO;
-import bg.softuni.examprep_coffeeshop.service.impl.UserServiceImpl;
+import bg.softuni.examprep_coffeeshop.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,9 +14,9 @@ import javax.validation.Valid;
 
 @Controller
 public class AuthController {
-    private final UserServiceImpl userService;
+    private final UserService userService;
 
-    public AuthController(UserServiceImpl userService) {
+    public AuthController(UserService userService) {
         this.userService = userService;
     }
 

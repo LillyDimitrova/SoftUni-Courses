@@ -1,14 +1,16 @@
 package bg.softuni.examprep_coffeeshop.model.dtos;
 
 import bg.softuni.examprep_coffeeshop.model.entity.Category;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-public class AddOrderDTO {
+public class OrderAddDTO {
 
     @NotBlank
     @Size(min = 3, max = 20)
@@ -16,9 +18,10 @@ public class AddOrderDTO {
 
     @NotBlank
     @Positive
-    private Integer price;
+    private BigDecimal price;
 
     @PastOrPresent
+    @DateTimeFormat(pattern = "MM-dd-yyyy'T'HH:mm:ss")
     private LocalDateTime orderTime;
 
     @NotBlank
@@ -27,23 +30,23 @@ public class AddOrderDTO {
     @Size(min = 5)
     private String description;
 
-    public AddOrderDTO() {
+    public OrderAddDTO() {
     }
 
     public String getName() {
         return name;
     }
 
-    public AddOrderDTO setName(String name) {
+    public OrderAddDTO setName(String name) {
         this.name = name;
         return this;
     }
 
-    public Integer getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public AddOrderDTO setPrice(Integer price) {
+    public OrderAddDTO setPrice(BigDecimal price) {
         this.price = price;
         return this;
     }
@@ -52,7 +55,7 @@ public class AddOrderDTO {
         return orderTime;
     }
 
-    public AddOrderDTO setOrderTime(LocalDateTime orderTime) {
+    public OrderAddDTO setOrderTime(LocalDateTime orderTime) {
         this.orderTime = orderTime;
         return this;
     }
@@ -61,7 +64,7 @@ public class AddOrderDTO {
         return category;
     }
 
-    public AddOrderDTO setCategory(Category category) {
+    public OrderAddDTO setCategory(Category category) {
         this.category = category;
         return this;
     }
@@ -70,7 +73,7 @@ public class AddOrderDTO {
         return description;
     }
 
-    public AddOrderDTO setDescription(String description) {
+    public OrderAddDTO setDescription(String description) {
         this.description = description;
         return this;
     }
