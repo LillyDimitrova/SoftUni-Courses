@@ -1,14 +1,15 @@
-package bg.softuni.examprep_coffeeshop.service;
+package bg.softuni.examprep_coffeeshop.service.impl;
 
-import bg.softuni.examprep_coffeeshop.model.Category;
-import bg.softuni.examprep_coffeeshop.model.CategoryNameEnum;
+import bg.softuni.examprep_coffeeshop.model.entity.Category;
+import bg.softuni.examprep_coffeeshop.model.enums.CategoryNameEnum;
 import bg.softuni.examprep_coffeeshop.repository.CategoryRepository;
+import bg.softuni.examprep_coffeeshop.service.CategoryService;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 
 @Service
-public class CategoryServiceImpl implements CategoryService{
+public class CategoryServiceImpl implements CategoryService {
     private final CategoryRepository categoryRepository;
 
     public CategoryServiceImpl(CategoryRepository categoryRepository) {

@@ -1,4 +1,6 @@
-package bg.softuni.examprep_coffeeshop.model;
+package bg.softuni.examprep_coffeeshop.model.entity;
+
+import bg.softuni.examprep_coffeeshop.model.enums.CategoryNameEnum;
 
 import javax.persistence.*;
 

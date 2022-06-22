@@ -1,4 +1,4 @@
-package bg.softuni.examprep_coffeeshop.model;
+package bg.softuni.examprep_coffeeshop.model.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

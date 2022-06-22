@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Find Your Home</title>
@@ -17,36 +17,6 @@
     <script src="/js/bootstrap.min.js"></script>
 </head>
 <body>
-<nav>
-    <ul>
-        <li>
-            <a href="offers.html">Offers</a>
-        </li>
-
-        <li>
-            <a href="about.html">About</a>
-        </li>
-
-        <li>
-            <a href="home.html">Home</a>
-        </li>
-
-        <li>
-            <a href="addoffer.html">Add Offer</a>
-        </li>
-
-        <li>
-            <a href="alloffers.html">All Offer</a>
-        </li>
-
-        <li>
-            <a href="register.html">Register</a>
-        </li>
-
-        <li>
-            <a href="login.html">Login</a>
-        </li>
-    </ul>
-</nav>
+<header th:replace="fragments/navigation"></header>
 </body>
 </html>

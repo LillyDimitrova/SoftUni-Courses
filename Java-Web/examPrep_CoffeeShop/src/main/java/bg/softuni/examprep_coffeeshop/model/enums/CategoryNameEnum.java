@@ -1,4 +1,4 @@
-package bg.softuni.examprep_coffeeshop.model;
+package bg.softuni.examprep_coffeeshop.model.enums;
 
 public enum CategoryNameEnum {
 
