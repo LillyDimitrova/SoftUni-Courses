@@ -1,6 +1,7 @@
 package bg.softuni.examprep_coffeeshop.model.dtos;
 
 import bg.softuni.examprep_coffeeshop.model.entity.Category;
+import bg.softuni.examprep_coffeeshop.model.enums.CategoryNameEnum;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotBlank;
@@ -12,20 +13,20 @@ import java.time.LocalDateTime;
 
 public class OrderAddDTO {
 
-    @NotBlank
+
     @Size(min = 3, max = 20)
     private String name;
 
-    @NotBlank
+
     @Positive
     private BigDecimal price;
 
     @PastOrPresent
-    @DateTimeFormat(pattern = "MM-dd-yyyy'T'HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime orderTime;
 
-    @NotBlank
-    private Category category;
+
+    private CategoryNameEnum category;
 
     @Size(min = 5)
     private String description;
@@ -60,11 +61,11 @@ public class OrderAddDTO {
         return this;
     }
 
-    public Category getCategory() {
+    public CategoryNameEnum getCategory() {
         return category;
     }
 
-    public OrderAddDTO setCategory(Category category) {
+    public OrderAddDTO setCategory(CategoryNameEnum category) {
         this.category = category;
         return this;
     }

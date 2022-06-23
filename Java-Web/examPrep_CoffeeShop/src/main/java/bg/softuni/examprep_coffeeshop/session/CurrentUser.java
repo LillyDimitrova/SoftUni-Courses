@@ -21,11 +21,6 @@ public class CurrentUser {
         this.id = user.getId();
         this.username = getUsername();
     }
-
-    public void logout(){
-        this.id = 0;
-        this.username = null;
-    }
     public CurrentUser setId(Long id) {
         this.id = id;
         return this;

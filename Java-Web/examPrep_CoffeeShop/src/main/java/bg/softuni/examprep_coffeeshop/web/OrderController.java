@@ -13,7 +13,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/order")
 public class OrderController {
     private final OrderService orderService;
 
@@ -22,26 +21,25 @@ public class OrderController {
     }
 
 
-    @ModelAttribute
-    public OrderAddDTO orderAddDTO(){
+    @ModelAttribute("orderAddDTO")
+    public OrderAddDTO initOrder(){
         return new OrderAddDTO();
     }
 
-    @GetMapping("/add")
-    public String add(){
+    @GetMapping("/orders/add")
+    public String orders(){
         return "order-add";
     }
 
-    @PostMapping("/add")
-    public String add(@Valid OrderAddDTO orderAddDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    @PostMapping("/orders/add")
+    public String orders(@Valid OrderAddDTO orderAddDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 
-        if (bindingResult.hasErrors()){
+        if (bindingResult.hasErrors() || !orderService.createOrder(orderAddDTO)){
             redirectAttributes.addFlashAttribute("orderAddDTO", orderAddDTO);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.orderAddDTO", bindingResult);
 
-            return "redirect:add";
+            return "redirect:/orders/add";
         }
-        orderService.addOrder(orderAddDTO);
 
         return "redirect:/home";
     }

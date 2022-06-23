@@ -5,9 +5,12 @@ import bg.softuni.examprep_coffeeshop.model.dtos.UserRegistrationDTO;
 import bg.softuni.examprep_coffeeshop.model.entity.User;
 import bg.softuni.examprep_coffeeshop.repository.UserRepository;
 import bg.softuni.examprep_coffeeshop.session.CurrentUser;
+import bg.softuni.examprep_coffeeshop.view.UserViewModel;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -56,4 +59,16 @@ public class UserService {
     }
 
 
+    public List<UserViewModel> findAllUserAndCountOrdersOrderByCountDes() {
+        return userRepository.findAllByOrdersDesc()
+                .stream()
+                .map(user -> {
+                    UserViewModel userViewModel = new UserViewModel();
+                    userViewModel.setUsername(user.getUsername());
+                    userViewModel.setCountOfOrders(user.getOrders().size());
+
+                    return userViewModel;
+                })
+                .collect(Collectors.toList());
+    }
 }
