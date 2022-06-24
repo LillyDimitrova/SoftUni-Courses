@@ -1,11 +1,11 @@
 package bg.softuni.examprep_coffeeshop.service;
 
+import bg.softuni.examprep_coffeeshop.model.dtos.UserDTO;
 import bg.softuni.examprep_coffeeshop.model.dtos.UserLoginDTO;
 import bg.softuni.examprep_coffeeshop.model.dtos.UserRegistrationDTO;
 import bg.softuni.examprep_coffeeshop.model.entity.User;
 import bg.softuni.examprep_coffeeshop.repository.UserRepository;
 import bg.softuni.examprep_coffeeshop.session.CurrentUser;
-import bg.softuni.examprep_coffeeshop.view.UserViewModel;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -59,16 +59,7 @@ public class UserService {
     }
 
 
-    public List<UserViewModel> findAllUserAndCountOrdersOrderByCountDes() {
-        return userRepository.findAllByOrdersDesc()
-                .stream()
-                .map(user -> {
-                    UserViewModel userViewModel = new UserViewModel();
-                    userViewModel.setUsername(user.getUsername());
-                    userViewModel.setCountOfOrders(user.getOrders().size());
-
-                    return userViewModel;
-                })
-                .collect(Collectors.toList());
+    public List<UserDTO> getAllUserAndCountOrdersOrderByCountDes() {
+        return userRepository.findAllByOrdersDesc().stream().map(UserDTO::new).collect(Collectors.toList());
     }
 }

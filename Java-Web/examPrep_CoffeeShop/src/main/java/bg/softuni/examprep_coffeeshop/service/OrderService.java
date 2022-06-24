@@ -1,6 +1,7 @@
 package bg.softuni.examprep_coffeeshop.service;
 
-import bg.softuni.examprep_coffeeshop.model.dtos.OrderAddDTO;
+import bg.softuni.examprep_coffeeshop.model.dtos.CreateOrderDTO;
+import bg.softuni.examprep_coffeeshop.model.dtos.OrderDTO;
 import bg.softuni.examprep_coffeeshop.model.entity.Category;
 import bg.softuni.examprep_coffeeshop.model.entity.Order;
 import bg.softuni.examprep_coffeeshop.model.entity.User;
@@ -8,7 +9,6 @@ import bg.softuni.examprep_coffeeshop.repository.CategoryRepository;
 import bg.softuni.examprep_coffeeshop.repository.OrderRepository;
 import bg.softuni.examprep_coffeeshop.repository.UserRepository;
 import bg.softuni.examprep_coffeeshop.session.CurrentUser;
-import bg.softuni.examprep_coffeeshop.view.OrderViewModel;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -31,7 +31,7 @@ public class OrderService {
     }
 
 
-    public boolean createOrder(OrderAddDTO orderAddDTO) {
+    public boolean createOrder(CreateOrderDTO orderAddDTO) {
 
     Category category = this.categoryRepository.findByName(orderAddDTO.getCategory()).orElse(null);
     if (category == null) {
@@ -51,14 +51,11 @@ public class OrderService {
         return true;
     }
 
-    public List<OrderViewModel> findAllOrderByPriceDesc() {
-        Object orderToOrderViewModel = null;
-       List<Order> list = orderRepository.findAllByOrderByPriceDesc();
-       List<OrderViewModel> returnList = new ArrayList<>();
-        for (Order e : list) {
-            OrderViewModel orderViewModel = new OrderViewModel().setCategory(e.getCategory()).setPrice(e.getPrice()).setId(e.getId()).setName(e.getName());
-            returnList.add(orderViewModel);
-        }
-        return returnList;
+    public List<OrderDTO> getAllOrdersByPriceDesc() {
+     return orderRepository.findAllByOrderByPriceDesc().stream().map(OrderDTO::new).collect(Collectors.toList());
+    }
+
+    public void readyOrder(Long id) {
+        orderRepository.deleteById(id);
     }
 }

@@ -1,17 +1,15 @@
 package bg.softuni.examprep_coffeeshop.model.dtos;
 
-import bg.softuni.examprep_coffeeshop.model.entity.Category;
 import bg.softuni.examprep_coffeeshop.model.enums.CategoryNameEnum;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-public class OrderAddDTO {
+public class CreateOrderDTO {
 
 
     @Size(min = 3, max = 20)
@@ -31,14 +29,14 @@ public class OrderAddDTO {
     @Size(min = 5)
     private String description;
 
-    public OrderAddDTO() {
+    public CreateOrderDTO() {
     }
 
     public String getName() {
         return name;
     }
 
-    public OrderAddDTO setName(String name) {
+    public CreateOrderDTO setName(String name) {
         this.name = name;
         return this;
     }
@@ -47,7 +45,7 @@ public class OrderAddDTO {
         return price;
     }
 
-    public OrderAddDTO setPrice(BigDecimal price) {
+    public CreateOrderDTO setPrice(BigDecimal price) {
         this.price = price;
         return this;
     }
@@ -56,7 +54,7 @@ public class OrderAddDTO {
         return orderTime;
     }
 
-    public OrderAddDTO setOrderTime(LocalDateTime orderTime) {
+    public CreateOrderDTO setOrderTime(LocalDateTime orderTime) {
         this.orderTime = orderTime;
         return this;
     }
@@ -65,7 +63,7 @@ public class OrderAddDTO {
         return category;
     }
 
-    public OrderAddDTO setCategory(CategoryNameEnum category) {
+    public CreateOrderDTO setCategory(CategoryNameEnum category) {
         this.category = category;
         return this;
     }
@@ -74,7 +72,7 @@ public class OrderAddDTO {
         return description;
     }
 
-    public OrderAddDTO setDescription(String description) {
+    public CreateOrderDTO setDescription(String description) {
         this.description = description;
         return this;
     }

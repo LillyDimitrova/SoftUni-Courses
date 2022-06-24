@@ -10,4 +10,5 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
 
     Optional<Order> findByName(String name);
     List<Order> findAllByOrderByPriceDesc();
+    void deleteById(Long id);
 }

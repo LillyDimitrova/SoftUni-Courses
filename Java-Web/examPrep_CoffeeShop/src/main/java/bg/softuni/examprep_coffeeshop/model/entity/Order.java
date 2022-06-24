@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "orders")
-public class Order extends BaseEntity{
+public class Order extends BaseEntity {
 
     @Column(nullable = false)
     private String name;
@@ -86,3 +86,4 @@ public class Order extends BaseEntity{
         return this;
     }
 }
+
