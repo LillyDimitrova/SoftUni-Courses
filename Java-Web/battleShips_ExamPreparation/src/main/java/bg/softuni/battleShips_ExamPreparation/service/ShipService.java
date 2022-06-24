@@ -1,6 +1,7 @@
 package bg.softuni.battleShips_ExamPreparation.service;
 
 import bg.softuni.battleShips_ExamPreparation.model.dto.CreateShipDTO;
+import bg.softuni.battleShips_ExamPreparation.model.dto.ShipDTO;
 import bg.softuni.battleShips_ExamPreparation.model.entity.CategoryEntity;
 import bg.softuni.battleShips_ExamPreparation.model.entity.ShipEntity;
 import bg.softuni.battleShips_ExamPreparation.model.entity.UserEntity;
@@ -11,7 +12,9 @@ import bg.softuni.battleShips_ExamPreparation.repository.UserRepository;
 import bg.softuni.battleShips_ExamPreparation.session.LoggedUser;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ShipService {
@@ -40,6 +43,7 @@ public class ShipService {
         switch(createShipDTO.getCategory()) {
             case 0:
                  type =  ShipType.BATTLE;
+
             case 1:
                 type = ShipType.CARGO;
             case 2:
@@ -58,5 +62,17 @@ public class ShipService {
                 .setUser(owner.get());
         shipRepository.save(ship);
         return true;
+    }
+
+    public List<ShipDTO> getShipsOwnedBy(long loggedUserId) {
+        return shipRepository.findByUserId(loggedUserId).stream().map(ShipDTO::new).collect(Collectors.toList());
+    }
+
+    public List<ShipDTO> getShipsNotOwnedBy(long loggedUserId) {
+        return shipRepository.findByUserIdNot(loggedUserId).stream().map(ShipDTO::new).collect(Collectors.toList());
+    }
+
+    public List<ShipDTO> getAllSorted() {
+        return shipRepository.findByOrderByHealthAscNameDescPowerAsc().stream().map(ShipDTO::new).collect(Collectors.toList());
     }
 }

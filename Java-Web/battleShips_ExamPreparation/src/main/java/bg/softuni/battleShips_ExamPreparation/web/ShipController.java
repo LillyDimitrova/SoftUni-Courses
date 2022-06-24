@@ -1,6 +1,7 @@
 package bg.softuni.battleShips_ExamPreparation.web;
 
 import bg.softuni.battleShips_ExamPreparation.model.dto.CreateShipDTO;
+import bg.softuni.battleShips_ExamPreparation.service.AuthService;
 import bg.softuni.battleShips_ExamPreparation.service.ShipService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -14,10 +15,12 @@ import javax.validation.Valid;
 @Controller
 public class ShipController {
 
-    private ShipService shipService;
+    private final ShipService shipService;
+    private final AuthService authService;
 
-    public ShipController(ShipService shipService) {
+    public ShipController(ShipService shipService, AuthService authService) {
         this.shipService = shipService;
+        this.authService = authService;
     }
 
     @ModelAttribute("createShipDTO")
@@ -27,11 +30,19 @@ public class ShipController {
 
     @GetMapping("/ships/add")
     public String ships() {
+
+        if (!this.authService.isLoggedIn()) {
+            return "redirect:/";
+        }
         return "ship-add";
     }
 
     @PostMapping("/ships/add")
     public String ships(@Valid CreateShipDTO createShipDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+
+        if (!this.authService.isLoggedIn()) {
+            return "redirect:/";
+        }
 
         if (bindingResult.hasErrors() || !this.shipService.create(createShipDTO)) {
             redirectAttributes.addFlashAttribute("createShipDTO", createShipDTO);

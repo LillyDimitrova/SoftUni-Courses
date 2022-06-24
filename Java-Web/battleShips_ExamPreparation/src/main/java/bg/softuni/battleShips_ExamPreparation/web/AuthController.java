@@ -32,12 +32,20 @@ public class AuthController {
 
     @GetMapping("/register")
     public String register() {
+        if (this.authService.isLoggedIn()) {
+            return "redirect:/home";
+        }
         return "register";
     }
 
     @PostMapping("/register")
     public String register(@Valid UserRegistrationDTO userRegistrationDTO,
                            BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+
+        if (this.authService.isLoggedIn()) {
+            return "redirect:/home";
+        }
+
         if (bindingResult.hasErrors() || !this.authService.register(userRegistrationDTO)) {
             redirectAttributes.addFlashAttribute("userRegistrationDTO", userRegistrationDTO).
                                addFlashAttribute("org.springframework.validation.BindingResult.userRegistrationDTO", bindingResult);
@@ -49,11 +57,20 @@ public class AuthController {
 
     @GetMapping("/login")
     public String login() {
+
+        if (this.authService.isLoggedIn()) {
+            return "redirect:/home";
+        }
         return "login";
     }
 
     @PostMapping("/login")
     public String login(@Valid UserLoginDTO userLoginDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+
+        if (this.authService.isLoggedIn()) {
+            return "redirect:/home";
+        }
+
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("userLoginDTO",
                     userLoginDTO).addFlashAttribute( "org.springframework.validation.BindingResult.userLoginDTO", bindingResult);
@@ -66,5 +83,12 @@ public class AuthController {
         }
         return "redirect:/home";
 
+    }
+
+    @GetMapping("/logout")
+    public String logout() {
+        this.authService.logout();
+
+        return "redirect:/";
     }
 }
