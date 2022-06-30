@@ -17,11 +17,11 @@ public class HouseEntity extends BaseEntity{
     @Column(nullable = false)
     private BigDecimal price;
 
-    @Column(nullable = false)
+
     @ManyToOne
     private CategoryEntity category;
 
-    @Column(nullable = false)
+
     @ManyToOne
     private TypeHouse type;
 
