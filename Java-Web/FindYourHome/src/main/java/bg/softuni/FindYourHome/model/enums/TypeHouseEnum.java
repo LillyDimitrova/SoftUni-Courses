@@ -1,6 +1,6 @@
 package bg.softuni.FindYourHome.model.enums;
 
-public enum TypeHouse {
+public enum TypeHouseEnum {
 
     HOUSE, APARTMENT;
 }

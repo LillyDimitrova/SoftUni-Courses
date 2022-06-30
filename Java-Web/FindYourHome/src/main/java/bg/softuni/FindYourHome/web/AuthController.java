@@ -24,9 +24,9 @@ public class AuthController {
 
     @GetMapping("/register")
     public String register() {
-//        if (this.userService.isLoggedIn()) {
-//            return "redirect:/home";
-//        }
+        if (this.userService.isLoggedIn()) {
+            return "redirect:/home";
+        }
         return "register";
     }
 
@@ -44,16 +44,51 @@ public class AuthController {
     public String register(@Valid UserRegistrationDTO userRegistrationDTO,
                            BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 
-//        if (this.userService.isLoggedIn()) {
-//            return "redirect:/home";
-//        }
+        if (this.userService.isLoggedIn()) {
+            return "redirect:/home";
+        }
 
         if (bindingResult.hasErrors() || !this.userService.register(userRegistrationDTO)) {
-            redirectAttributes.addFlashAttribute("userRegistrationDTO", userRegistrationDTO).
-                    addFlashAttribute("org.springframework.validation.BindingResult.userRegistrationDTO", bindingResult);
+            redirectAttributes.addFlashAttribute("userRegistrationDTO", userRegistrationDTO);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegistrationDTO", bindingResult);
+
 
             return "redirect:/register";
         }
         return "redirect:/login";
+    }
+
+    @GetMapping("/login")
+    public String login() {
+
+        if (this.userService.isLoggedIn()) {
+            return "redirect:/home";
+        }
+        return "login";
+    }
+    @PostMapping("/login")
+    public String login(@Valid UserLoginDTO userLoginDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+
+        if (this.userService.isLoggedIn()) {
+            return "redirect:/home";
+        }
+
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("userLoginDTO",
+                    userLoginDTO).addFlashAttribute( "org.springframework.validation.BindingResult.userLoginDTO", bindingResult);
+            return "redirect:/login";
+        }
+        if (!this.userService.login(userLoginDTO)) {
+            redirectAttributes.addFlashAttribute("userLoginDTO", userLoginDTO);
+            redirectAttributes.addFlashAttribute("badCredentials", true);
+            return "redirect:/login";
+        }
+        return "redirect:/";
+    }
+    @GetMapping("/logout")
+    public String logout() {
+        this.userService.logout();
+
+        return "redirect:/home";
     }
 }

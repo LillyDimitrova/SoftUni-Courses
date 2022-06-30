@@ -6,13 +6,13 @@ import java.util.Set;
 @Entity
 @Table(name = "users")
 public class UserEntity extends BaseEntity{
-    @Column(nullable = false, unique = true)
+    @Column(unique = true,nullable = false)
     private String username;
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<RoleEntity> roles;
 
-    @Column(nullable = false, unique = true)
+    @Column(unique = true,nullable = false)
     private String email;
 
     @Column(nullable = false)

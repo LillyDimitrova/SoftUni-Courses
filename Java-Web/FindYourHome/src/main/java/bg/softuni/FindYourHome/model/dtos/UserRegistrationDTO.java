@@ -1,18 +1,27 @@
 package bg.softuni.FindYourHome.model.dtos;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import bg.softuni.FindYourHome.model.validator.UniqueUserEmail;
+import bg.softuni.FindYourHome.model.validator.UniqueUsername;
+import org.hibernate.validator.constraints.UniqueElements;
+
+import javax.validation.constraints.*;
 
 public class UserRegistrationDTO {
 
-    @NotBlank
+    @NotEmpty(message = "Username should be provided")
     @Size(min = 3, max = 20, message = "Username length must be between 3 and 20 characters")
+    @UniqueUsername(message = "Username should be unique.")
     private String username;
 
-    @Email
-    @NotNull(message = "Email cannot be empty")
+    @Size(min = 3, max = 20, message = "Username length must be between 3 and 20 characters")
+    private String firstName;
+
+    @Size(min = 3, max = 20, message = "Username length must be between 3 and 20 characters")
+    private String lastName;
+
+    @NotEmpty(message = "User email should be provided")
+    @Email(message = "User email should be valid. ")
+    @UniqueUserEmail(message = "User email should be unique.")
     private String email;
 
     @Size(min = 3, max = 20, message = "Password length must be between 3 and 20 characters")
@@ -26,6 +35,24 @@ public class UserRegistrationDTO {
 
     public String getUsername() {
         return username;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public UserRegistrationDTO setFirstName(String firstName) {
+        this.firstName = firstName;
+        return this;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public UserRegistrationDTO setLastName(String lastName) {
+        this.lastName = lastName;
+        return this;
     }
 
     public UserRegistrationDTO setUsername(String username) {

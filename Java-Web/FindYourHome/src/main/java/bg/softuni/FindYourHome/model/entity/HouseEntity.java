@@ -1,7 +1,7 @@
 package bg.softuni.FindYourHome.model.entity;
 
 import bg.softuni.FindYourHome.model.enums.CategoryEnum;
-import bg.softuni.FindYourHome.model.enums.TypeHouse;
+import bg.softuni.FindYourHome.model.enums.TypeHouseEnum;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -18,11 +18,11 @@ public class HouseEntity extends BaseEntity{
     private BigDecimal price;
 
     @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private CategoryEnum category;
+    @ManyToOne
+    private CategoryEntity category;
 
     @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
+    @ManyToOne
     private TypeHouse type;
 
     @Column(nullable = false)
@@ -49,11 +49,11 @@ public class HouseEntity extends BaseEntity{
         return this;
     }
 
-    public CategoryEnum getCategory() {
+    public CategoryEntity getCategory() {
         return category;
     }
 
-    public HouseEntity setCategory(CategoryEnum category) {
+    public HouseEntity setCategory(CategoryEntity category) {
         this.category = category;
         return this;
     }

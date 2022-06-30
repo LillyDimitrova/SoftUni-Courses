@@ -22,5 +22,6 @@ public class DBInit implements CommandLineRunner {
                 roleEntityRepository.save(role);
             }
         }
+
     }
 }
