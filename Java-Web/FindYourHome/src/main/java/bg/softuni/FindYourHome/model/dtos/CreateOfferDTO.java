@@ -30,10 +30,6 @@ public class CreateOfferDTO {
     private BigDecimal price;
 
     @PastOrPresent
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
-    private LocalDateTime dateTime;
-
-    @PastOrPresent
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate yearOfConstruction;
 
@@ -82,13 +78,7 @@ public class CreateOfferDTO {
         return this;
     }
 
-    public LocalDateTime getDateTime() {
-        return dateTime;
-    }
-
-    public CreateOfferDTO setDateTime(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
-        return this;
+    public CreateOfferDTO() {
     }
 
     public LocalDate getYearOfConstruction() {

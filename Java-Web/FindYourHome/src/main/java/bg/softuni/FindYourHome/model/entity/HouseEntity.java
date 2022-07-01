@@ -31,6 +31,7 @@ public class HouseEntity extends BaseEntity{
     public HouseEntity() {
     }
 
+
     public String getDescription() {
         return description;
     }

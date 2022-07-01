@@ -2,10 +2,12 @@ package bg.softuni.FindYourHome.web;
 
 import bg.softuni.FindYourHome.model.dtos.CreateOfferDTO;
 import bg.softuni.FindYourHome.service.OfferService;
+import bg.softuni.FindYourHome.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -14,9 +16,11 @@ import javax.validation.Valid;
 @Controller
 public class OfferController {
     private final OfferService offerService;
+    private final UserService userService;
 
-    public OfferController(OfferService offerService) {
+    public OfferController(OfferService offerService, UserService userService) {
         this.offerService = offerService;
+        this.userService = userService;
     }
 
 
@@ -26,19 +30,19 @@ public class OfferController {
     }
 
     @GetMapping("/offer-add")
-    public String songs(){
+    public String addOffers(){
         return "/offer-add";
     }
 
     @PostMapping("offer-add")
-    public String songs(@Valid CreateOfferDTO createOfferDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String addOffers(@Valid CreateOfferDTO createOfferDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 
-//        if (!this.userService.isLoggedIn()) {
-//            return "redirect:/";
-//        }
+        if (!this.userService.isLoggedIn()) {
+            return "redirect:/";
+        }
 
         if (bindingResult.hasErrors() || !offerService.create(createOfferDTO)){
-            redirectAttributes.addFlashAttribute("createSongDTO", createOfferDTO);
+            redirectAttributes.addFlashAttribute("createOfferDTO", createOfferDTO);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.createOfferDTO", bindingResult);
 
             return "redirect:/offer-add";
@@ -46,4 +50,5 @@ public class OfferController {
 
         return "redirect:/home";
     }
+
 }

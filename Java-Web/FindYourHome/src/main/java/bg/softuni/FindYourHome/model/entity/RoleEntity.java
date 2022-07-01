@@ -14,6 +14,9 @@ public class RoleEntity extends BaseEntity{
     private RoleEnum role;
 
 
+    public RoleEntity() {
+    }
+
     public RoleEnum getRole() {
         return role;
     }

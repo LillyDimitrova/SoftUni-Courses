@@ -12,6 +12,9 @@ public class TypeHouse extends BaseEntity{
     @Enumerated(EnumType.STRING)
     private TypeHouseEnum type;
 
+    public TypeHouse() {
+    }
+
     public TypeHouseEnum getType() {
         return type;
     }
