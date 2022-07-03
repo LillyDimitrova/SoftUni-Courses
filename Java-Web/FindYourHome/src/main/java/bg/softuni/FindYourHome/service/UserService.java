@@ -9,6 +9,7 @@ import bg.softuni.FindYourHome.repository.UserRepository;
 import bg.softuni.FindYourHome.session.CurrentUser;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -38,16 +39,12 @@ public class UserService {
         }
 
         UserEntity user = new UserEntity();
-        RoleEntity roleEntity = new RoleEntity().setRole(RoleEnum.USER);
         user.setEmail(userRegistrationDTO.getEmail()).
                 setPassword(userRegistrationDTO.getPassword()).
                 setUsername(userRegistrationDTO.getUsername()).
                 setFirstName(userRegistrationDTO.getFirstName()).
                 setLastName(userRegistrationDTO.getLastName()).
-                setEmail(userRegistrationDTO.getEmail()).
-                setRoles(Set.of(roleEntity));
-
-
+                setEmail(userRegistrationDTO.getEmail());
         userRepository.save(user);
 
         return true;

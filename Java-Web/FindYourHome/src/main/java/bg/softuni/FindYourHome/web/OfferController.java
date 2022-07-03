@@ -22,6 +22,10 @@ public class OfferController {
         this.offerService = offerService;
         this.userService = userService;
     }
+    @GetMapping("/offers/all")
+    public String allOffers() {
+        return "offers";
+    }
 
 
     @ModelAttribute("createOfferDTO")
@@ -41,14 +45,15 @@ public class OfferController {
             return "redirect:/";
         }
 
-        if (bindingResult.hasErrors() || !offerService.create(createOfferDTO)){
+        if (bindingResult.hasErrors()){
             redirectAttributes.addFlashAttribute("createOfferDTO", createOfferDTO);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.createOfferDTO", bindingResult);
 
             return "redirect:/offer-add";
         }
+        offerService.create(createOfferDTO);
 
-        return "redirect:/home";
+        return "redirect:/offers/all";
     }
 
 }

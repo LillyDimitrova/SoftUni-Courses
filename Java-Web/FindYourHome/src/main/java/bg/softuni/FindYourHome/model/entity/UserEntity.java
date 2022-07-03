@@ -1,6 +1,8 @@
 package bg.softuni.FindYourHome.model.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -10,7 +12,7 @@ public class UserEntity extends BaseEntity{
     private String username;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    private Set<RoleEntity> roles;
+    private List<RoleEntity> roles = new ArrayList<>();
 
     @Column(unique = true,nullable = false)
     private String email;
@@ -36,11 +38,11 @@ public class UserEntity extends BaseEntity{
         return this;
     }
 
-    public Set<RoleEntity> getRoles() {
+    public List<RoleEntity> getRoles() {
         return roles;
     }
 
-    public UserEntity setRoles(Set<RoleEntity> roles) {
+    public UserEntity setRoles(List<RoleEntity> roles) {
         this.roles = roles;
         return this;
     }

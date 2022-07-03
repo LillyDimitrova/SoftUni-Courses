@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+
 
 @Entity
 @Table(name = "offers")
@@ -20,9 +20,11 @@ public class OfferEntity extends BaseEntity{
     private UserEntity seller;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private CategoryEnum category;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private TypeHouseEnum typeHouse;
 
     @Column(nullable = false)
@@ -44,6 +46,7 @@ public class OfferEntity extends BaseEntity{
 
         return category;
     }
+
 
     public OfferEntity setCategory(CategoryEnum category) {
         this.category = category;

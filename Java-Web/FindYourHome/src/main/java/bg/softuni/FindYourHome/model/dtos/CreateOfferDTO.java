@@ -21,10 +21,6 @@ public class CreateOfferDTO {
     private TypeHouseEnum type;
     @NotNull
     private CategoryEnum category;
-
-    @NotNull
-    private UserEntity seller;
-
     @NotNull
     @Positive
     private BigDecimal price;
@@ -57,15 +53,6 @@ public class CreateOfferDTO {
 
     public CreateOfferDTO setCategory(CategoryEnum category) {
         this.category = category;
-        return this;
-    }
-
-    public UserEntity getSeller() {
-        return seller;
-    }
-
-    public CreateOfferDTO setSeller(UserEntity seller) {
-        this.seller = seller;
         return this;
     }
 
