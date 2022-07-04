@@ -3,6 +3,7 @@ package bg.softuni.FindYourHome.web;
 import bg.softuni.FindYourHome.model.dtos.UserLoginDTO;
 import bg.softuni.FindYourHome.model.dtos.UserRegistrationDTO;
 import bg.softuni.FindYourHome.service.UserService;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Controller
@@ -24,9 +26,7 @@ public class AuthController {
 
     @GetMapping("/register")
     public String register() {
-        if (this.userService.isLoggedIn()) {
-            return "redirect:/home";
-        }
+
         return "register";
     }
 
@@ -44,51 +44,36 @@ public class AuthController {
     public String register(@Valid UserRegistrationDTO userRegistrationDTO,
                            BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 
-        if (this.userService.isLoggedIn()) {
-            return "redirect:/home";
-        }
 
-        if (bindingResult.hasErrors() || !this.userService.register(userRegistrationDTO)) {
+
+        if (bindingResult.hasErrors() ) {
             redirectAttributes.addFlashAttribute("userRegistrationDTO", userRegistrationDTO);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegistrationDTO", bindingResult);
 
-
             return "redirect:/register";
         }
-        return "redirect:/login";
+        this.userService.registerAndLogin(userRegistrationDTO);
+        return "redirect:/";
     }
 
     @GetMapping("/login")
     public String login() {
-
-        if (this.userService.isLoggedIn()) {
-            return "redirect:/home";
-        }
         return "login";
     }
     @PostMapping("/login")
-    public String login(@Valid UserLoginDTO userLoginDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String onFailedLogin(
+            @ModelAttribute(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY) String userName,
+            RedirectAttributes redirectAttributes) {
 
-        if (this.userService.isLoggedIn()) {
-            return "redirect:/home";
-        }
+        redirectAttributes.addFlashAttribute(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY, userName);
+        redirectAttributes.addFlashAttribute("badCredentials",
+                true);
 
-        if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("userLoginDTO",
-                    userLoginDTO).addFlashAttribute( "org.springframework.validation.BindingResult.userLoginDTO", bindingResult);
-            return "redirect:/login";
-        }
-        if (!this.userService.login(userLoginDTO)) {
-            redirectAttributes.addFlashAttribute("userLoginDTO", userLoginDTO);
-            redirectAttributes.addFlashAttribute("badCredentials", true);
-            return "redirect:/login";
-        }
         return "redirect:/";
     }
     @GetMapping("/logout")
-    public String logout() {
-        this.userService.logout();
-
-        return "redirect:/home";
+    public String logout(HttpSession httpSession) {
+            httpSession.invalidate();
+        return "redirect:/";
     }
 }

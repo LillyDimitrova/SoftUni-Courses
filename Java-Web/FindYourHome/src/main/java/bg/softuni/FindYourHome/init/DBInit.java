@@ -1,26 +1,28 @@
 package bg.softuni.FindYourHome.init;
 
 import bg.softuni.FindYourHome.service.CategoryService;
-import bg.softuni.FindYourHome.service.RoleService;
 import bg.softuni.FindYourHome.service.TypeHouseService;
+import bg.softuni.FindYourHome.service.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 @Component
 public class DBInit implements CommandLineRunner {
-    private final RoleService roleService;
+
     private final CategoryService categoryService;
     private final TypeHouseService typeHouseService;
+    private final UserService userService;
 
-    public DBInit(RoleService roleService, CategoryService categoryService, TypeHouseService typeHouseService) {
-        this.roleService = roleService;
+    public DBInit(CategoryService categoryService, TypeHouseService typeHouseService, UserService userService) {
+
         this.categoryService = categoryService;
         this.typeHouseService = typeHouseService;
+        this.userService = userService;
     }
 
     @Override
     public void run(String... args) throws Exception {
-        roleService.initRoles();
+        userService.init();
         categoryService.initCategories();
         typeHouseService.initTypeHouse();
     }

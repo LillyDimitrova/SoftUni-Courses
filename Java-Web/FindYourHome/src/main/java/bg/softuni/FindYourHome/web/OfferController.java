@@ -41,9 +41,6 @@ public class OfferController {
     @PostMapping("offer-add")
     public String addOffers(@Valid CreateOfferDTO createOfferDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 
-        if (!this.userService.isLoggedIn()) {
-            return "redirect:/";
-        }
 
         if (bindingResult.hasErrors()){
             redirectAttributes.addFlashAttribute("createOfferDTO", createOfferDTO);

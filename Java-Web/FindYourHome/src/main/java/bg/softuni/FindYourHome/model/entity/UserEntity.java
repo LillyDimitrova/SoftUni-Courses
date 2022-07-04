@@ -46,6 +46,10 @@ public class UserEntity extends BaseEntity{
         this.roles = roles;
         return this;
     }
+    public UserEntity addRole(RoleEntity userRole) {
+        this.roles.add(userRole);
+        return this;
+    }
 
     public String getEmail() {
         return email;
@@ -81,5 +85,17 @@ public class UserEntity extends BaseEntity{
     public UserEntity setPassword(String password) {
         this.password = password;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return "UserEntity{" +
+                "username='" + username + '\'' +
+                ", roles=" + roles +
+                ", email='" + email + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }
