@@ -2,25 +2,24 @@ package bg.softuni.FindYourHome.service;
 
 import bg.softuni.FindYourHome.model.dtos.UserLoginDTO;
 import bg.softuni.FindYourHome.model.dtos.UserRegistrationDTO;
-import bg.softuni.FindYourHome.model.entity.RoleEntity;
 import bg.softuni.FindYourHome.model.entity.UserEntity;
-import bg.softuni.FindYourHome.model.enums.RoleEnum;
 import bg.softuni.FindYourHome.repository.UserRepository;
 import bg.softuni.FindYourHome.session.CurrentUser;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class UserService {
     private final UserRepository userRepository;
     private final CurrentUser currentUser;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository, CurrentUser currentUser) {
+    public UserService(UserRepository userRepository, CurrentUser currentUser, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.currentUser = currentUser;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public boolean register(UserRegistrationDTO userRegistrationDTO) {
@@ -40,7 +39,7 @@ public class UserService {
 
         UserEntity user = new UserEntity();
         user.setEmail(userRegistrationDTO.getEmail()).
-                setPassword(userRegistrationDTO.getPassword()).
+                setPassword(passwordEncoder.encode(userRegistrationDTO.getPassword())).
                 setUsername(userRegistrationDTO.getUsername()).
                 setFirstName(userRegistrationDTO.getFirstName()).
                 setLastName(userRegistrationDTO.getLastName()).
@@ -51,13 +50,24 @@ public class UserService {
     }
 
     public boolean login(UserLoginDTO userLoginDTO) {
-        Optional<UserEntity> user = userRepository.findByUsernameAndPassword(userLoginDTO.getUsername(), userLoginDTO.getPassword());
+        Optional<UserEntity> user = userRepository.findByUsername(userLoginDTO.getUsername());
         if (!user.isPresent()) {
             return false;
         }
-        this.currentUser.login(user.get());
 
-        return true;
+        String rawPassword = userLoginDTO.getPassword();
+        String encodedPassword = user.get().getPassword();
+
+        this.currentUser.login(user.get());
+        boolean success = passwordEncoder.
+                matches(rawPassword, encodedPassword);
+        if (success) {
+            this.currentUser.login(user.get());
+
+        } else {
+            logout();
+        }
+        return success;
     }
     public void logout() {
         this.currentUser.logout();
