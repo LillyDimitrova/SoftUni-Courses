@@ -2,7 +2,7 @@ package bg.softuni.FindYourHome.config;
 
 import bg.softuni.FindYourHome.model.enums.RoleEnum;
 import bg.softuni.FindYourHome.repository.UserRepository;
-import bg.softuni.FindYourHome.service.AppUserDetailsService;
+import bg.softuni.FindYourHome.service.CurrentUserDetailService;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,31 +22,48 @@ public class SecurityConfiguration {
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.
-                authorizeRequests().
-                requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll().
-                antMatchers("/", "/login", "/register").permitAll().
-                antMatchers("/pages/admins").hasRole(RoleEnum.ADMIN.name()).
-                anyRequest().
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
+        http.
+                // define which requests are allowed and which not
+                        authorizeRequests().
+                // everyone can download static resources (css, js, images)
+                        requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll().
+                // everyone can login and register
+                        antMatchers("/", "/users/login", "/users/register").permitAll().
+                // all other pages are available for logger in users
+                        anyRequest().
                 authenticated().
-        and().
-                formLogin().
-                loginPage("/login").
-                usernameParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY).
-                passwordParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_PASSWORD_KEY).
-                defaultSuccessUrl("/").
-                failureForwardUrl("/login-error").
-        and().
-                logout().
-                logoutUrl("/logout").
-                invalidateHttpSession(true).
+                and().
+                // configuration of form login
+                        formLogin().
+                // the custom login form
+                        loginPage("/users/login").
+                // the name of the username form field
+                        usernameParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY).
+                // the name of the password form field
+                        passwordParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_PASSWORD_KEY).
+                // where to go in case that the login is successful
+                        defaultSuccessUrl("/").
+                // where to go in case that the login failed
+                        failureForwardUrl("/users/login-error").
+                and().
+                // configure logut
+                        logout().
+                // which is the logout url, must be POST request
+                        logoutUrl("/users/logout").
+                // on logout go to the home page
+                        logoutSuccessUrl("/").
+                // invalidate the session and delete the cookies
+                        invalidateHttpSession(true).
                 deleteCookies("JSESSIONID");
 
-        return httpSecurity.build();
+
+        return http.build();
     }
+
     @Bean
     public UserDetailsService userDetailsService(UserRepository userRepository) {
-        return new AppUserDetailsService(userRepository);
+        return new CurrentUserDetailService(userRepository);
     }
 }

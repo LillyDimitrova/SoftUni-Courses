@@ -5,7 +5,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Find Your Home</title>
+    <title>Find your home!</title>
     <link rel="stylesheet" href="/css/reset-css.css"/>
     <link rel="stylesheet" href="/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="/css/main.css"/>
@@ -19,23 +19,21 @@
 
         <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
             <ul class="navbar-nav row">
+                <li  class="nav-item col-md-4">
+                    <a class="nav-link text-white active h5" href="/offers">Offers</a>
+                </li>
                 <th:block sec:authorize="!isAuthenticated()">
-
                     <li  class="nav-item col-md-5">
-                        <a class="nav-link text-white active h5" href="/register">Register</a>
+                        <a class="nav-link text-white active h5" href="/users/register">Register</a>
                     </li>
-
                     <li  class="nav-item col-md-4">
-                        <a class="nav-link text-white active h5" href="/login">Login </a>
+                        <a class="nav-link text-white active h5" href="/users/login">Login </a>
                     </li>
                 </th:block>
 
                 <th:block sec:authorize="isAuthenticated()">
                     <li  class="nav-item col-md-4">
-                        <a class="nav-link text-white active h5" href="/home">Home</a>
-                    </li>
-                    <li  class="nav-item col-md-4">
-                        <a class="nav-link text-white active h5" href="/offers">Offers</a>
+                        <a class="nav-link text-white active h5" href="/">Home</a>
                     </li>
                     <li class="nav-item col-md-4">
                         <a class="nav-link text-white active h5" href="/logout">Logout</a>

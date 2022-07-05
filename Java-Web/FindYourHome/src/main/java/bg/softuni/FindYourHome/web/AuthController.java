@@ -1,6 +1,5 @@
 package bg.softuni.FindYourHome.web;
 
-import bg.softuni.FindYourHome.model.dtos.UserLoginDTO;
 import bg.softuni.FindYourHome.model.dtos.UserRegistrationDTO;
 import bg.softuni.FindYourHome.service.UserService;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -9,12 +8,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Controller
+@RequestMapping("/users")
 public class AuthController {
 
 
@@ -29,15 +29,9 @@ public class AuthController {
 
         return "register";
     }
-
     @ModelAttribute("userRegistrationDTO")
     public UserRegistrationDTO initRegistrationDto() {
         return new UserRegistrationDTO();
-    }
-
-    @ModelAttribute("userLoginDTO")
-    public UserLoginDTO userLoginDTO() {
-        return new UserLoginDTO();
     }
 
     @PostMapping("/register")
@@ -61,7 +55,7 @@ public class AuthController {
         return "login";
     }
     @PostMapping("/login")
-    public String onFailedLogin(
+    public String login(
             @ModelAttribute(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY) String userName,
             RedirectAttributes redirectAttributes) {
 
@@ -69,11 +63,6 @@ public class AuthController {
         redirectAttributes.addFlashAttribute("badCredentials",
                 true);
 
-        return "redirect:/";
-    }
-    @GetMapping("/logout")
-    public String logout(HttpSession httpSession) {
-            httpSession.invalidate();
         return "redirect:/";
     }
 }

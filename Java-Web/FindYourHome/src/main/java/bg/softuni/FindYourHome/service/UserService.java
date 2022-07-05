@@ -6,7 +6,6 @@ import bg.softuni.FindYourHome.model.entity.UserEntity;
 import bg.softuni.FindYourHome.model.enums.RoleEnum;
 import bg.softuni.FindYourHome.repository.RoleEntityRepository;
 import bg.softuni.FindYourHome.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,17 +20,16 @@ import java.util.List;
 public class UserService {
     private final UserRepository userRepository;
     private final RoleEntityRepository roleEntityRepository;
-    private final UserDetailsService appUserDetailsService;
+    private final UserDetailsService userDetailsService;
     private final PasswordEncoder passwordEncoder;
 
 
     public UserService(UserRepository userRepository,
                        RoleEntityRepository roleEntityRepository,
-                       UserDetailsService appUserDetailsService,
-                       PasswordEncoder passwordEncoder) {
+                       UserDetailsService userDetailsService, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.roleEntityRepository = roleEntityRepository;
-        this.appUserDetailsService = appUserDetailsService;
+        this.userDetailsService = userDetailsService;
         this.passwordEncoder = passwordEncoder;
 
     }
@@ -60,68 +58,21 @@ public class UserService {
                 setPassword(passwordEncoder.encode(userRegistrationDTO.getPassword()));
         userRepository.save(userEntity);
 
-        UserDetails userDetails = appUserDetailsService.loadUserByUsername(userEntity.getUsername());
+        UserDetails userDetails = userDetailsService.loadUserByUsername(userEntity.getUsername());
         Authentication auth = new UsernamePasswordAuthenticationToken(userDetails, userDetails.getPassword(),userDetails.getAuthorities());
 
         SecurityContextHolder.getContext().setAuthentication(auth);
     }
 
-//    public boolean register(UserRegistrationDTO userRegistrationDTO) {
-//        if (!userRegistrationDTO.getPassword().equals(userRegistrationDTO.getConfirmPassword())) {
-//            return false;
-//        }
-//
-//        Optional<UserEntity> byEmail = userRepository.findByEmail(userRegistrationDTO.getEmail());
-//        if (byEmail.isPresent()) {
-//            return false;
-//        }
-//
-//        Optional<UserEntity> byUsername = userRepository.findByUsername(userRegistrationDTO.getUsername());
-//        if (byUsername.isPresent()) {
-//            return false;
-//        }
-//
-//        UserEntity user = new UserEntity();
-//        user.setEmail(userRegistrationDTO.getEmail()).
-//                setPassword(passwordEncoder.encode(userRegistrationDTO.getPassword())).
-//                setUsername(userRegistrationDTO.getUsername()).
-//                setFirstName(userRegistrationDTO.getFirstName()).
-//                setLastName(userRegistrationDTO.getLastName()).
-//                setEmail(userRegistrationDTO.getEmail());
-//        userRepository.save(user);
-//
-//        return true;
-//    }
-//
-//    public boolean login(UserLoginDTO userLoginDTO) {
-//        Optional<UserEntity> user = userRepository.findByUsername(userLoginDTO.getUsername());
-//        if (!user.isPresent()) {
-//            return false;
-//        }
-//
-//        String rawPassword = userLoginDTO.getPassword();
-//        String encodedPassword = user.get().getPassword();
-//
-//        this.currentUser.login(user.get());
-//        boolean success = passwordEncoder.
-//                matches(rawPassword, encodedPassword);
-//        if (success) {
-//            this.currentUser.login(user.get());
-//
-//        } else {
-//            logout();
-//        }
-//        return success;
-//    }
-//    public void logout() {
-//        this.currentUser.logout();
-//    }
-//
-//    public boolean isLoggedIn() {
-//        return this.currentUser.getId() > 0;
-//    }
-//
-//    public long getLoggedUserId() {
-//        return this.currentUser.getId();
-//    }
+    private void login(UserEntity userEntity) {
+        UserDetails userDetails =
+                userDetailsService.loadUserByUsername(userEntity.getEmail());
+
+        Authentication auth =
+                new UsernamePasswordAuthenticationToken(
+                        userDetails,
+                        userDetails.getPassword(),
+                        userDetails.getAuthorities()
+                );
+    }
 }
