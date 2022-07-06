@@ -54,15 +54,15 @@ public class AuthController {
     public String login() {
         return "login";
     }
-    @PostMapping("/login")
-    public String login(
-            @ModelAttribute(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY) String userName,
-            RedirectAttributes redirectAttributes) {
-
-        redirectAttributes.addFlashAttribute(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY, userName);
-        redirectAttributes.addFlashAttribute("badCredentials",
-                true);
-
-        return "redirect:/";
-    }
+//    @PostMapping("/login")
+//    public String login(
+//            @ModelAttribute(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY) String userName,
+//            RedirectAttributes redirectAttributes) {
+//
+//        redirectAttributes.addFlashAttribute(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY, userName);
+//        redirectAttributes.addFlashAttribute("badCredentials",
+//                true);
+//
+//        return "redirect:/";
+//    }
 }
