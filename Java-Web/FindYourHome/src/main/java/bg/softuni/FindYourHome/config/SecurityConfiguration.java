@@ -24,60 +24,42 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-//        http.
-//                // define which requests are allowed and which not
-//                        authorizeRequests().
-//                // everyone can download static resources (css, js, images)
-//                        requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll().
-//                // everyone can login and register
-//                        antMatchers("/", "/users/login", "/users/register").permitAll().
-//                // all other pages are available for logger in users
-//                        anyRequest().
-//                authenticated().
-//                and().
-//                // configuration of form login
-//                        formLogin().
-//                // the custom login form
-//                        loginPage("/users/login").
-//                // the name of the username form field
-//                        usernameParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY).
-//                // the name of the password form field
-//                        passwordParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_PASSWORD_KEY).
-//                // where to go in case that the login is successful
-//                        defaultSuccessUrl("/").
-//                // where to go in case that the login failed
-//                        failureForwardUrl("/users/login-error").
-//                and().
-//                // configure logut
-//                        logout().
-//                // which is the logout url, must be POST request
-//                        logoutUrl("/users/logout").
-//                // on logout go to the home page
-//                        logoutSuccessUrl("/").
-//                // invalidate the session and delete the cookies
-//                        invalidateHttpSession(true).
-//                deleteCookies("JSESSIONID");
-        http.authorizeRequests()
-                .antMatchers("/users/login").permitAll()
-                .antMatchers("/**").hasAnyRole("USER", "ADMIN")
-                .antMatchers("/admin/**").hasAnyRole("ADMIN")
-                .and()
-                .formLogin()
-                .loginPage("/users/login")
-                .loginProcessingUrl("/users/process-login")
-                .defaultSuccessUrl("/home")
-                .failureUrl("/login?error=true")
-                .permitAll()
-                .and()
-                .logout()
-                .logoutSuccessUrl("/users/login?logout=true")
-                .invalidateHttpSession(true)
-                .deleteCookies("JSESSIONID")
-                .permitAll()
-                .and()
-                .csrf()
-                .disable();
-
+        http.
+                // define which requests are allowed and which not
+                        authorizeRequests().
+                // everyone can download static resources (css, js, images)
+                        requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll().
+                // everyone can login and register
+                        antMatchers("/", "/users/login", "/users/register").permitAll().
+                antMatchers("/pages/moderators").hasRole(RoleEnum.MODERATOR.name()).
+                // pages available only for admins
+                        antMatchers("/pages/admins").hasRole(RoleEnum.ADMIN.name()).
+                // all other pages are available for logger in users
+                        anyRequest().
+                authenticated().
+                and().
+                // configuration of form login
+                        formLogin().
+                // the custom login form
+                        loginPage("/users/login").
+                // the name of the username form field
+                        usernameParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY).
+                // the name of the password form field
+                        passwordParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_PASSWORD_KEY).
+                // where to go in case that the login is successful
+                        defaultSuccessUrl("/", true).
+                // where to go in case that the login failed
+                        failureForwardUrl("/users/login-error").
+                and().
+                // configure logut
+                        logout().
+                // which is the logout url, must be POST request
+                        logoutUrl("/users/logout").
+                // on logout go to the home page
+                        logoutSuccessUrl("/").
+                // invalidate the session and delete the cookies
+                        invalidateHttpSession(true).
+                deleteCookies("JSESSIONID");
 
         return http.build();
     }

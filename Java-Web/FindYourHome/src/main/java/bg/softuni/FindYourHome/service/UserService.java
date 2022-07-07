@@ -40,10 +40,11 @@ public class UserService {
     public void init() {
         if (userRepository.count() == 0 && roleEntityRepository.count() == 0) {
             RoleEntity adminRole = new RoleEntity().setRole(RoleEnum.ADMIN);
-            RoleEntity userRole = new RoleEntity().setRole(RoleEnum.USER);
-            userRole = roleEntityRepository.save(userRole);
+            RoleEntity moderatorRole = new RoleEntity().setRole(RoleEnum.MODERATOR);
             adminRole = roleEntityRepository.save(adminRole);
-            initAdmin(List.of(adminRole));
+            moderatorRole = roleEntityRepository.save(moderatorRole);
+            initAdmin(List.of(adminRole, moderatorRole));
+            initModerator(List.of(moderatorRole));
         }
     }
     private void initAdmin(List<RoleEntity> roles) {
@@ -51,29 +52,35 @@ public class UserService {
                 setRoles(roles).
                 setFirstName("Admin").
                 setLastName("Adminov").
-                setEmail("admin@admin.123").
+                setEmail("admin@example.com").
                 setPassword(passwordEncoder.encode("topsecret"));
+
         userRepository.save(admin);
+    }
+    private void initModerator(List<RoleEntity> roles) {
+        UserEntity moderator = new UserEntity().
+                setRoles(roles).
+                setFirstName("Moderator").
+                setLastName("Moderatorov").
+                setEmail("moderator@example.com").
+                setPassword(passwordEncoder.encode("topsecret"));
+
+        userRepository.save(moderator);
     }
     public void registerAndLogin(UserRegistrationDTO userRegistrationDTO) {
 
-        RoleEntity roleEntity = roleEntityRepository.findByRole(RoleEnum.USER).orElse(null);
-        List<RoleEntity> roles = new ArrayList<>();
-        roles.add(roleEntity);
-        UserEntity newUser = new UserEntity().
-                setRoles(roles).
-        setUsername(userRegistrationDTO.getUsername()).
-                setEmail(userRegistrationDTO.getEmail()).
-                setFirstName(userRegistrationDTO.getFirstName()).
-                setLastName(userRegistrationDTO.getLastName()).
-        setPassword(passwordEncoder.encode(userRegistrationDTO.getPassword()));
-        userRepository.save(newUser);
-        login(newUser);
-    }
+        UserEntity newUser =
+                new UserEntity().
+                        setEmail(userRegistrationDTO.getEmail()).
+                        setUsername(userRegistrationDTO.getUsername()).
+                        setFirstName(userRegistrationDTO.getFirstName()).
+                        setLastName(userRegistrationDTO.getLastName()).
+                        setPassword(passwordEncoder.encode(userRegistrationDTO.getPassword()));
 
-    private void login(UserEntity userEntity) {
+        userRepository.save(newUser);
+
         UserDetails userDetails =
-                userDetailsService.loadUserByUsername(userEntity.getUsername());
+                userDetailsService.loadUserByUsername(newUser.getUsername());
 
         Authentication auth =
                 new UsernamePasswordAuthenticationToken(
@@ -82,7 +89,10 @@ public class UserService {
                         userDetails.getAuthorities()
                 );
 
-
-        SecurityContextHolder.getContext().setAuthentication(auth);
+        SecurityContextHolder.
+                getContext().
+                setAuthentication(auth);
     }
 }
+
+

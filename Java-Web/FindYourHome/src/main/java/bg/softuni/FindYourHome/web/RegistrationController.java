@@ -2,7 +2,6 @@ package bg.softuni.FindYourHome.web;
 
 import bg.softuni.FindYourHome.model.dtos.UserRegistrationDTO;
 import bg.softuni.FindYourHome.service.UserService;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,12 +14,12 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/users")
-public class AuthController {
+public class RegistrationController {
 
 
     private final UserService userService;
 
-    public AuthController(UserService userService) {
+    public RegistrationController(UserService userService) {
         this.userService = userService;
     }
 
@@ -50,19 +49,5 @@ public class AuthController {
         return "redirect:/";
     }
 
-    @GetMapping("/login")
-    public String login() {
-        return "login";
-    }
-//    @PostMapping("/login")
-//    public String login(
-//            @ModelAttribute(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY) String userName,
-//            RedirectAttributes redirectAttributes) {
-//
-//        redirectAttributes.addFlashAttribute(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY, userName);
-//        redirectAttributes.addFlashAttribute("badCredentials",
-//                true);
-//
-//        return "redirect:/";
-//    }
+
 }

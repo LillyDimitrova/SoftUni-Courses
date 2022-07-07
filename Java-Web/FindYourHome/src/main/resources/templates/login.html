@@ -7,13 +7,14 @@
 <main>
     <h1 class="text-center mt-2"><span class="badge badge-pill badge-dark">Login</span></h1>
     <hr class="hr-3 w-25 bg-white"/>
-    <form class="mx-auto w-25 bg-blur" th:action="@{/users/login}" th:method="POST" th:object="${userRegistrationDTO}">
+    <form class="mx-auto w-25 bg-blur"
+          th:action="@{/users/login}"
+          th:method="POST">
         <div class="form-group">
             <label for="username" class="text-white font-weight-bold">Username</label>
             <input
                     id="username"
                     name="username"
-                    th:field="*{username}"
                     type="text"
                     min="2"
                     max="50"
@@ -25,20 +26,23 @@
             <input
                     id="password"
                     name="password"
-                    th:field="*{password}"
                     type="password"
                     min="2"
                     max="20"
                     class="form-control"
                     placeholder="Password"/>
 
-            <p class="invalid-feedback errors alert alert-danger">
+            <p th:if="${bad_credentials}" class="errors alert alert-danger">
                 Invalid username or password.
             </p>
         </div>
 
-        <div class="button-holder d-flex justify-content-center">
-            <button type="submit" class="btn btn-warning  mb-3">Login</button>
+        <div class="row">
+            <div class="col col-md-4">
+                <div class="button-holder d-flex">
+                    <input type="submit" class="btn btn-info btn-lg" value="Login"/>
+                </div>
+            </div>
         </div>
 
     </form>

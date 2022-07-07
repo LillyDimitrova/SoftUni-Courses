@@ -6,6 +6,7 @@ import bg.softuni.FindYourHome.model.user.CurrentUserDetails;
 import bg.softuni.FindYourHome.repository.UserRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -24,7 +25,7 @@ public class CurrentUserDetailService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username)
             throws UsernameNotFoundException {
         return userRepository.
-                findByEmail(username).
+                findByUsername(username).
                 map(this::map).
                 orElseThrow(() -> new UsernameNotFoundException("User with email " + username + " not found!"));
     }
@@ -41,6 +42,11 @@ public class CurrentUserDetailService implements UserDetailsService {
                         stream().
                         map(this::map).
                         collect(Collectors.toList()));
+//        return User.builder().
+//                username(userEntity.getUsername()).
+//                password(userEntity.getPassword()).
+//                authorities(userEntity.getRoles().stream().map(this::map).collect(Collectors.toList())).
+//                build();
     }
 
     private GrantedAuthority map(RoleEntity userRole) {
