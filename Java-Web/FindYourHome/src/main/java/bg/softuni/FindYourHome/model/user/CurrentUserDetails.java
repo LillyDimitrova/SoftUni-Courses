@@ -18,6 +18,7 @@ public class CurrentUserDetails implements UserDetails {
         this.firstName = firstName;
         this.lastName = lastName;
         this.authorities = authorities;
+
     }
     public String getFullName() {
         StringBuilder fullName = new StringBuilder();
@@ -76,4 +77,5 @@ public class CurrentUserDetails implements UserDetails {
     public String getLastName() {
         return lastName;
     }
+
 }

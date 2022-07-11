@@ -45,6 +45,7 @@ public class CurrentUserDetailService implements UserDetailsService {
 //        return User.builder().
 //                username(userEntity.getUsername()).
 //                password(userEntity.getPassword()).
+//
 //                authorities(userEntity.getRoles().stream().map(this::map).collect(Collectors.toList())).
 //                build();
     }

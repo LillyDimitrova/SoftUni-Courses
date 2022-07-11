@@ -9,8 +9,10 @@ import bg.softuni.FindYourHome.repository.UserRepository;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -92,6 +94,18 @@ public class UserService {
         SecurityContextHolder.
                 getContext().
                 setAuthentication(auth);
+    }
+
+    public UserEntity getCurrentUser() {
+        String currentUserName;
+        Object principal = SecurityContextHolder. getContext(). getAuthentication(). getPrincipal();
+        if (principal instanceof UserDetails) {
+            currentUserName = ((UserDetails)principal). getUsername();
+        } else {
+            currentUserName = principal. toString();
+        }
+        UserEntity currentUser = userRepository.findByUsername(currentUserName).orElse(null);
+        return currentUser;
     }
 }
 

@@ -31,7 +31,8 @@ public class SecurityConfiguration {
                         requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll().
                 // everyone can login and register
                         antMatchers("/", "/users/login", "/users/register").permitAll().
-                antMatchers("/pages/moderators").hasRole(RoleEnum.MODERATOR.name()).
+                        antMatchers("pages/profile").authenticated().
+                        antMatchers("/pages/moderators").hasRole(RoleEnum.MODERATOR.name()).
                 // pages available only for admins
                         antMatchers("/pages/admins").hasRole(RoleEnum.ADMIN.name()).
                 // all other pages are available for logger in users
