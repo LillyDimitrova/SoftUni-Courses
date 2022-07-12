@@ -5,6 +5,7 @@ import bg.softuni.FindYourHome.model.user.CurrentUserDetails;
 import bg.softuni.FindYourHome.model.views.UserProfileView;
 import bg.softuni.FindYourHome.service.CurrentUserDetailService;
 import bg.softuni.FindYourHome.service.UserService;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,8 +38,8 @@ public class PagesController {
     }
 
     @GetMapping("/pages/profile")
-    public String profile(Principal principal, Model model) {
-        UserEntity userEntity = userService.getCurrentUser();
+    public String profile(Principal principal, Model model, @AuthenticationPrincipal UserDetails userDetails) {
+        UserEntity userEntity = userService.getCurrentUser(userDetails);
         UserProfileView userProfileView = new UserProfileView().setEmail(userEntity.getEmail()).setFirstName(userEntity.getFirstName()).
                 setLastName(userEntity.getLastName()).setUsername(userEntity.getUsername());
 

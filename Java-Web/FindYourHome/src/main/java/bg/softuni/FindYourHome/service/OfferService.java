@@ -5,9 +5,13 @@ import bg.softuni.FindYourHome.model.entity.*;
 import bg.softuni.FindYourHome.model.mapper.OfferMapper;
 import bg.softuni.FindYourHome.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import java.security.Principal;
 
 @Service
 public class OfferService {
@@ -31,18 +35,19 @@ public class OfferService {
     this.userService = userService;
 }
 
-    public boolean create(CreateOfferDTO createOfferDTO) {
-
-        UserEntity seller = userService.getCurrentUser();
-        TypeHouseEntity typeHouse = typeHouseRepository.findByType(createOfferDTO.getType()).orElse(null);
-        CategoryEntity category = categoryRepository.findByCategory(createOfferDTO.getCategory()).orElse(null);
-        if (typeHouse == null) {
-            return false;
-        }
-        if (category == null) {
-            return false;
-        }
+    public boolean create( CreateOfferDTO createOfferDTO, UserDetails userDetails) {
         OfferEntity offer = offerMapper.addOfferDtoToOfferEntity(createOfferDTO);
+
+        UserEntity seller = userRepository.findByEmail(userDetails.getUsername()).
+        orElseThrow();
+//        TypeHouseEntity typeHouse = typeHouseRepository.findByType(createOfferDTO.getType()).orElse(null);
+//        CategoryEntity category = categoryRepository.findByCategory(createOfferDTO.getCategory()).orElse(null);
+//        if (typeHouse == null) {
+//            return false;
+//        }
+//        if (category == null) {
+//            return false;
+//        }
 
         offer.setSeller(seller);
 

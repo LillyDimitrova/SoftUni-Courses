@@ -8,6 +8,7 @@ import java.util.Set;
 @Entity
 @Table(name = "users")
 public class UserEntity extends BaseEntity{
+
     @Column(unique = true,nullable = false)
     private String username;
 
@@ -17,6 +18,8 @@ public class UserEntity extends BaseEntity{
     @Column(unique = true,nullable = false)
     private String email;
 
+    @OneToMany(mappedBy = "seller")
+    private List<OfferEntity> offers = new ArrayList<>();
     @Column(nullable = false)
     private String firstName;
 
@@ -27,6 +30,15 @@ public class UserEntity extends BaseEntity{
     private String password;
 
     public UserEntity() {
+    }
+
+    public List<OfferEntity> getOffers() {
+        return offers;
+    }
+
+    public UserEntity setOffers(List<OfferEntity> offers) {
+        this.offers = offers;
+        return this;
     }
 
     public String getUsername() {

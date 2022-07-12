@@ -3,6 +3,8 @@ package bg.softuni.FindYourHome.web;
 import bg.softuni.FindYourHome.model.dtos.CreateOfferDTO;
 import bg.softuni.FindYourHome.service.OfferService;
 import bg.softuni.FindYourHome.service.UserService;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,7 +41,7 @@ public class OfferController {
     }
 
     @PostMapping("offer-add")
-    public String addOffers(@Valid CreateOfferDTO createOfferDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String addOffers(@Valid CreateOfferDTO createOfferDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes,  @AuthenticationPrincipal UserDetails userDetails) {
 
 
         if (bindingResult.hasErrors()){
@@ -48,7 +50,7 @@ public class OfferController {
 
             return "redirect:/offer-add";
         }
-        offerService.create(createOfferDTO);
+        offerService.create(createOfferDTO, userDetails);
 
         return "redirect:/offers/all";
     }
