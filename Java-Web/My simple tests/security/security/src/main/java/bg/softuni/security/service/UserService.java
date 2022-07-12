@@ -58,7 +58,7 @@ public class UserService  {
                 setFirstName("Admin").
                 setLastName("Adminov").
                 setEmail("admin@example.com").
-                setPassword(passwordEncoder.encode(adminPass));
+                setPassword(passwordEncoder.encode("topsecret"));
 
         userRepository.save(admin);
     }

@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.security.reactive.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
@@ -14,7 +15,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
-public class SecurityConfiguration {
+public class SecurityConfiguration  {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -25,6 +26,8 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http.
+
+
                 // define which requests are allowed and which not
                         authorizeRequests().
                 // everyone can download static resources (css, js, images)
@@ -48,7 +51,7 @@ public class SecurityConfiguration {
                 // the name of the password form field
                         passwordParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_PASSWORD_KEY).
                 // where to go in case that the login is successful
-                        defaultSuccessUrl("/").
+                        defaultSuccessUrl("/", true).
                 // where to go in case that the login failed
                         failureForwardUrl("/users/login-error").
                 and().
@@ -63,6 +66,7 @@ public class SecurityConfiguration {
 
         return http.build();
     }
+
 
     @Bean
     public UserDetailsService userDetailsService(UserRepository userRepository) {

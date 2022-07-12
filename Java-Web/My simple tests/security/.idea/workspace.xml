@@ -4,7 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="58344a10-0646-41e0-8ad6-88eadb0d4bad" name="Changes" comment="" />
+    <list default="true" id="58344a10-0646-41e0-8ad6-88eadb0d4bad" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../.idea/springSecurity/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/springSecurity/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/security/src/main/java/bg/softuni/security/config/SecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/security/src/main/java/bg/softuni/security/config/SecurityConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/security/src/main/java/bg/softuni/security/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/security/src/main/java/bg/softuni/security/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/security/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/security/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/security/src/main/resources/static/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/security/src/main/resources/static/css/main.css" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -36,6 +43,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
   <component name="JpbToolWindowState">
     <option name="myId2FirstActivated">
       <map>
@@ -56,30 +66,32 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2BZR9HUuNZAYsYnkvlrcJFektTb" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelOrder2": "2",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RequestMappingsPanelWidth2": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/Lilly/Downloads/security",
-    "spring.configuration.checksum": "af52558553d9854dae7a7e5475be8878"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelOrder2&quot;: &quot;2&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth2&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Lilly/Desktop/SoftUni-Courses/Java-Web/FindYourHome&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;22f63637140a2cd4aa323117c2a4a0a8&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Lilly\Downloads\security\security\src\main\java\bg\softuni\security" />
@@ -90,10 +102,17 @@
       <recent name="C:\Users\Lilly\Downloads\security\security\src\main\resources\static\images" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Spring Boot.Unnamed">
+    <configuration name="SecurityApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="bg.softuni.security.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="bg.softuni.security.SecurityApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Unnamed" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="ACTIVE_PROFILES" />
-      <module name="security.security.main" />
+      <module name="bg.softuni.security.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="bg.softuni.security.SecurityApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -110,10 +129,23 @@
       <updated>1657111470381</updated>
       <workItem from="1657111473943" duration="467000" />
       <workItem from="1657112070327" duration="6369000" />
+      <workItem from="1657174677427" duration="9761000" />
+      <workItem from="1657535698738" duration="97000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
