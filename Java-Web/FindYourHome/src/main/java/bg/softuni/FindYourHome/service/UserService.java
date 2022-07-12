@@ -54,22 +54,27 @@ public class UserService {
     private void initAdmin(List<RoleEntity> roles) {
         UserEntity admin = new UserEntity().
                 setRoles(roles).
+                setUsername("admin").
                 setFirstName("Admin").
                 setLastName("Adminov").
                 setEmail("admin@example.com").
                 setPassword(passwordEncoder.encode("topsecret"));
 
         userRepository.save(admin);
+
     }
     private void initModerator(List<RoleEntity> roles) {
         UserEntity moderator = new UserEntity().
                 setRoles(roles).
+                setUsername("moderator").
                 setFirstName("Moderator").
                 setLastName("Moderatorov").
                 setEmail("moderator@example.com").
                 setPassword(passwordEncoder.encode("topsecret"));
 
-        userRepository.save(moderator);
+       this.userRepository.save(moderator);
+       login(moderator);
+
     }
 
     public void registerAndLogin(UserRegistrationDTO userRegistrationDTO) {
