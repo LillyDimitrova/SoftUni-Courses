@@ -1,13 +1,24 @@
 spring:
-  datasource:
-    driverClassName: com.mysql.cj.jdbc.Driver
-    url: "jdbc:mysql://localhost:3306/FindYourHome?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8"
-    username: root
-    password: root123
-  jpa:
-    database-platform: org.hibernate.dialect.MySQL8Dialect
-    hibernate:
-      ddl-auto: update
-      sql:
+    datasource:
+        driverClassName: com.mysql.cj.jdbc.Driver
+        password: root123
+        url: jdbc:mysql://localhost:3306/FindYourHome?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8
+        username: root
+    jpa:
+        database-platform: org.hibernate.dialect.MySQL8Dialect
+        hibernate:
+            ddl-auto: update
+    mail:
+        from: me@localhost
+        host: localhost
+        password: ''
+        port: 1025
+        protocol: smtp
+        smtp:
+            auth: false
+            starttls:
+                enable: false
+        username: ''
+    sql:
         init:
-          mode: always
+            mode: always

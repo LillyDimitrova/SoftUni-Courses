@@ -25,19 +25,21 @@ public class UserService {
     private final UserDetailsService userDetailsService;
     private final PasswordEncoder passwordEncoder;
     private final UserMapper userMapper;
+    private EmailService emailService;
 
 
 
 
     public UserService(UserRepository userRepository,
                        RoleEntityRepository roleEntityRepository,
-                       UserDetailsService userDetailsService, PasswordEncoder passwordEncoder, UserMapper userMapper) {
+                       UserDetailsService userDetailsService, PasswordEncoder passwordEncoder, UserMapper userMapper, EmailService emailService) {
         this.userRepository = userRepository;
         this.roleEntityRepository = roleEntityRepository;
         this.userDetailsService = userDetailsService;
         this.passwordEncoder = passwordEncoder;
 
         this.userMapper = userMapper;
+        this.emailService = emailService;
     }
     public void init() {
         if (userRepository.count() == 0 && roleEntityRepository.count() == 0) {
@@ -84,9 +86,9 @@ public class UserService {
         setPassword(passwordEncoder.encode(userRegistrationDTO.getPassword()));
 
         this.userRepository.save(newUser);
+        emailService.sendRegistrationEmail(newUser.getEmail(),
+                newUser.getFirstName() + " " + newUser.getLastName());
         login(newUser);
-//        emailService.sendRegistrationEmail(newUser.getEmail(),
-//                newUser.getFirstName() + " " + newUser.getLastName());
     }
     private void login(UserEntity userEntity) {
         UserDetails userDetails =
