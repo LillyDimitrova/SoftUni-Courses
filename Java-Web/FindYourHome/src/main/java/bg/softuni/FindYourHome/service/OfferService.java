@@ -1,12 +1,16 @@
 package bg.softuni.FindYourHome.service;
 
 import bg.softuni.FindYourHome.model.dtos.CreateOfferDTO;
+import bg.softuni.FindYourHome.model.dtos.OfferDTO;
 import bg.softuni.FindYourHome.model.entity.*;
 import bg.softuni.FindYourHome.model.mapper.OfferMapper;
 import bg.softuni.FindYourHome.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class OfferService {
@@ -42,4 +46,8 @@ public class OfferService {
         return true;
     }
 
+
+    public List<OfferDTO> getAllOffers() {
+        return offerRepository.findAll().stream().map(OfferDTO::new).collect(Collectors.toList());
+    }
 }

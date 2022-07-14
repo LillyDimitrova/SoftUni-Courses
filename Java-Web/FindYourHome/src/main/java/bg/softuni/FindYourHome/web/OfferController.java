@@ -1,7 +1,7 @@
 package bg.softuni.FindYourHome.web;
 
 import bg.softuni.FindYourHome.model.dtos.CreateOfferDTO;
-import bg.softuni.FindYourHome.model.entity.OfferEntity;
+import bg.softuni.FindYourHome.model.dtos.OfferDTO;
 import bg.softuni.FindYourHome.service.OfferService;
 import bg.softuni.FindYourHome.service.UserService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class OfferController {
@@ -55,11 +56,13 @@ public class OfferController {
 
         return "redirect:/offers/all";
     }
-//    @GetMapping("offers")
-//    public String offers(CreateOfferDTO createOfferDTO, Model model, @AuthenticationPrincipal UserDetails userDetails) {
-//        OfferEntity offer = offerService.
-//
-//        return "redirect:/offers/all";
-//    }
+    @GetMapping("offers")
+    public String offers(Model model) {
+
+        List<OfferDTO> offers = offerService.getAllOffers();
+        model.addAttribute("offers", offers);
+
+        return "redirect:/offers/all";
+    }
 
 }
