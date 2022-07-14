@@ -41,8 +41,7 @@ public class PagesController {
     public String profile(Principal principal, Model model, @AuthenticationPrincipal UserDetails userDetails) {
         UserEntity userEntity = userService.getCurrentUser(userDetails);
         UserProfileView userProfileView = new UserProfileView().setEmail(userEntity.getEmail()).setFirstName(userEntity.getFirstName()).
-                setLastName(userEntity.getLastName()).setUsername(userEntity.getUsername());
-
+                setLastName(userEntity.getLastName()).setUsername(userEntity.getUsername()).setCountOfOffers(userEntity.getOffers().size());
         model.addAttribute("user", userProfileView);
         return "profile";
     }

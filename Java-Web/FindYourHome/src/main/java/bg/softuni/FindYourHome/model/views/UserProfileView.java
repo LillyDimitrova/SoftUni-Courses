@@ -1,8 +1,5 @@
 package bg.softuni.FindYourHome.model.views;
 
-
-import bg.softuni.FindYourHome.model.user.CurrentUserDetails;
-
 public class UserProfileView {
 
 
@@ -10,16 +7,18 @@ public class UserProfileView {
     private String email;
     private String firstName;
     private String lastName;
+    private int countOfOffers;
 
 
     public UserProfileView() {
     }
 
-    public UserProfileView(String username, String email, String firstName, String lastName) {
+    public UserProfileView(String username, String email, String firstName, String lastName, int countOfOffers) {
         this.username = username;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.countOfOffers = countOfOffers;
     }
 
     public UserProfileView setUsername(String username) {
@@ -39,6 +38,15 @@ public class UserProfileView {
 
     public UserProfileView setLastName(String lastName) {
         this.lastName = lastName;
+        return this;
+    }
+
+    public int getCountOfOffers() {
+        return countOfOffers;
+    }
+
+    public UserProfileView setCountOfOffers(int countOfOffers) {
+        this.countOfOffers = countOfOffers;
         return this;
     }
 
