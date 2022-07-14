@@ -54,7 +54,7 @@ public class OfferController {
         }
         offerService.create(createOfferDTO, userDetails);
 
-        return "redirect:/offers/all";
+        return "redirect:/offers";
     }
     @GetMapping("offers")
     public String offers(Model model) {
