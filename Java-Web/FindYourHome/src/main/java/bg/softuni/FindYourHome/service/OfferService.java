@@ -1,7 +1,6 @@
 package bg.softuni.FindYourHome.service;
 
 import bg.softuni.FindYourHome.model.dtos.CreateOfferDTO;
-import bg.softuni.FindYourHome.model.dtos.OfferDTO;
 import bg.softuni.FindYourHome.model.entity.*;
 import bg.softuni.FindYourHome.model.mapper.OfferMapper;
 import bg.softuni.FindYourHome.repository.*;
@@ -47,7 +46,7 @@ public class OfferService {
     }
 
 
-    public List<OfferDTO> getAllOffers() {
-        return offerRepository.findAll().stream().map(OfferDTO::new).collect(Collectors.toList());
-    }
+//    public List<OfferDTO> getAllOffers() {
+//        return offerRepository.findAll().stream().map(OfferDTO::new).collect(Collectors.toList());
+//    }
 }

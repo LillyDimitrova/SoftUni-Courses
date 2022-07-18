@@ -1,9 +1,7 @@
 package bg.softuni.FindYourHome.web;
 
 import bg.softuni.FindYourHome.model.entity.UserEntity;
-import bg.softuni.FindYourHome.model.user.CurrentUserDetails;
 import bg.softuni.FindYourHome.model.views.UserProfileView;
-import bg.softuni.FindYourHome.service.CurrentUserDetailService;
 import bg.softuni.FindYourHome.service.UserService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,10 +20,6 @@ public class PagesController {
         this.userService = userService;
     }
 
-    @GetMapping("/pages/all")
-    public String all() {
-        return "all";
-    }
 
     @GetMapping("/pages/moderators")
     public String moderators() {
