@@ -1,6 +1,7 @@
 package bg.softuni.FindYourHome.model.mapper;
 
 import bg.softuni.FindYourHome.model.dtos.CreateOfferDTO;
+import bg.softuni.FindYourHome.model.dtos.OfferDetailDTO;
 import bg.softuni.FindYourHome.model.entity.OfferEntity;
 import org.mapstruct.Mapper;
 
@@ -9,4 +10,6 @@ public interface OfferMapper {
 
 //    OfferEntity addOfferDtoToOfferEntity(CreateOfferDTO createOfferDTO);
     OfferEntity addOfferDtoToOfferEntity(CreateOfferDTO createOfferDTO);
+
+    OfferDetailDTO offerEntityToOfferDetailDTO(OfferEntity offer);
 }

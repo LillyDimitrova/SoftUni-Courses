@@ -1,15 +1,15 @@
 package bg.softuni.FindYourHome.service;
 
 import bg.softuni.FindYourHome.model.dtos.CreateOfferDTO;
+import bg.softuni.FindYourHome.model.dtos.OfferDetailDTO;
 import bg.softuni.FindYourHome.model.entity.*;
 import bg.softuni.FindYourHome.model.mapper.OfferMapper;
 import bg.softuni.FindYourHome.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class OfferService {
@@ -32,9 +32,9 @@ public class OfferService {
 
     this.userService = userService;
 }
-
+    OfferEntity offer = new OfferEntity();
     public boolean create( CreateOfferDTO createOfferDTO, UserDetails userDetails) {
-        OfferEntity offer = offerMapper.addOfferDtoToOfferEntity(createOfferDTO);
+         offer = offerMapper.addOfferDtoToOfferEntity(createOfferDTO);
 
         UserEntity seller = userRepository.findByEmail(userDetails.getUsername()).
         orElseThrow();
@@ -45,8 +45,13 @@ public class OfferService {
         return true;
     }
 
+    public Page<OfferDetailDTO> getAllOffers(Pageable pageable) {
 
-//    public List<OfferDTO> getAllOffers() {
-//        return offerRepository.findAll().stream().map(OfferDTO::new).collect(Collectors.toList());
-//    }
+    return offerRepository.findAll(pageable).map(offerMapper::offerEntityToOfferDetailDTO);
+    }
+    public OfferDetailDTO getCurrentNewOffer(){
+       return offerRepository.findById(offer.getId()).map(offerMapper::offerEntityToOfferDetailDTO).orElse(null);
+
+    }
+
 }

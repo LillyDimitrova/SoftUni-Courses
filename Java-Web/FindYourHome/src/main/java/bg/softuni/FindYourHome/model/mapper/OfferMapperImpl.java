@@ -1,6 +1,7 @@
 package bg.softuni.FindYourHome.model.mapper;
 
 import bg.softuni.FindYourHome.model.dtos.CreateOfferDTO;
+import bg.softuni.FindYourHome.model.dtos.OfferDetailDTO;
 import bg.softuni.FindYourHome.model.entity.OfferEntity;
 import org.springframework.stereotype.Component;
 
@@ -31,5 +32,18 @@ public class OfferMapperImpl implements OfferMapper {
                 setImageUrl("https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500");
 
         return offerEntity;
+    }
+
+    @Override
+    public OfferDetailDTO offerEntityToOfferDetailDTO(OfferEntity offer) {
+        OfferDetailDTO offerDetailDTO = new OfferDetailDTO()
+                .setCategory(offer.getCategory())
+                .setDescription(offer.getDescription())
+                .setImageUrl(offer.getImageUrl())
+                .setPrice(offer.getPrice())
+                .setTypeHouse(offer.getTypeHouse())
+                .setYearOfConstruction(offer.getYearOfConstruction())
+                .setSeller(offer.getSeller());
+        return offerDetailDTO;
     }
 }

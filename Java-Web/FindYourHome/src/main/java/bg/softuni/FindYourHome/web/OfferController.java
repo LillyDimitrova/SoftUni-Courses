@@ -1,11 +1,15 @@
 package bg.softuni.FindYourHome.web;
 
 import bg.softuni.FindYourHome.model.dtos.CreateOfferDTO;
+import bg.softuni.FindYourHome.model.dtos.OfferDetailDTO;
 import bg.softuni.FindYourHome.service.OfferService;
 import bg.softuni.FindYourHome.service.UserService;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,15 +21,14 @@ import javax.validation.Valid;
 @Controller
 public class OfferController {
     private final OfferService offerService;
-    private final UserService userService;
 
-    public OfferController(OfferService offerService, UserService userService) {
+    public OfferController(OfferService offerService) {
         this.offerService = offerService;
-        this.userService = userService;
     }
 
     @GetMapping("/all-offers")
-    public String all() {
+    public String all(Model model, @PageableDefault(page = 0, size = 3) Pageable pageable) {
+        model.addAttribute("offers", offerService.getAllOffers(pageable));
         return "all-offers";
     }
 
@@ -41,7 +44,7 @@ public class OfferController {
     }
 
     @PostMapping("offer-add")
-    public String addOffers(@Valid CreateOfferDTO createOfferDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes,  @AuthenticationPrincipal UserDetails userDetails) {
+    public String addOffers(@Valid CreateOfferDTO createOfferDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes,  @AuthenticationPrincipal UserDetails userDetails, Model model) {
 
 
         if (bindingResult.hasErrors()){
@@ -49,10 +52,13 @@ public class OfferController {
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.createOfferDTO", bindingResult);
 
             return "redirect:/offer-add";
-        }
-        offerService.create(createOfferDTO, userDetails);
+        } else {
+             offerService.create(createOfferDTO, userDetails);
+            OfferDetailDTO offerDetailDTO = offerService.getCurrentNewOffer();
+            model.addAttribute("newOffer",offerDetailDTO);
 
-        return "redirect:/added-offer";
+            return "added-offer";
+        }
     }
 
 }
