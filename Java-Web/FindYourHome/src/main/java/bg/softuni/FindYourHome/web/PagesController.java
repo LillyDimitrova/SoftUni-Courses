@@ -52,8 +52,7 @@ public class PagesController {
             page = 0,
             size = 3) Pageable pageable) {
 
-
-       model.addAttribute("users", userService.getAllUsers(pageable));
+       model.addAttribute("usersList", userService.getAllUsers(pageable));
 
         return "users";
     }
