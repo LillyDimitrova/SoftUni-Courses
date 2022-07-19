@@ -1,5 +1,6 @@
 package bg.softuni.FindYourHome.service;
 
+import bg.softuni.FindYourHome.model.dtos.UserDetailDTO;
 import bg.softuni.FindYourHome.model.dtos.UserRegistrationDTO;
 import bg.softuni.FindYourHome.model.entity.RoleEntity;
 import bg.softuni.FindYourHome.model.entity.UserEntity;
@@ -7,6 +8,8 @@ import bg.softuni.FindYourHome.model.enums.RoleEnum;
 import bg.softuni.FindYourHome.model.mapper.UserMapper;
 import bg.softuni.FindYourHome.repository.RoleEntityRepository;
 import bg.softuni.FindYourHome.repository.UserRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,6 +20,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -89,6 +93,7 @@ public class UserService {
         emailService.sendRegistrationEmail(newUser.getEmail(),
                 newUser.getFirstName() + " " + newUser.getLastName());
         login(newUser);
+
     }
     private void login(UserEntity userEntity) {
         UserDetails userDetails =
@@ -109,6 +114,10 @@ public class UserService {
     public UserEntity getCurrentUser(UserDetails userDetails) {
        return userRepository.findByEmail(userDetails.getUsername()).
                 orElseThrow();
+    }
+
+    public Page<UserDetailDTO> getAllUsers(Pageable pageable) {
+        return userRepository.findAll(pageable).map(UserDetailDTO::new);
     }
 }
 
