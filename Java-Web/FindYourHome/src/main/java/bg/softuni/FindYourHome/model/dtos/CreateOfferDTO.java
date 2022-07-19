@@ -21,6 +21,9 @@ public class CreateOfferDTO {
     private TypeHouseEnum type;
     @NotNull
     private CategoryEnum category;
+
+    @NotNull
+    private String imageUrl;
     @NotNull
     @Positive
     private BigDecimal price;
@@ -62,6 +65,15 @@ public class CreateOfferDTO {
 
     public CreateOfferDTO setPrice(BigDecimal price) {
         this.price = price;
+        return this;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public CreateOfferDTO setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
         return this;
     }
 

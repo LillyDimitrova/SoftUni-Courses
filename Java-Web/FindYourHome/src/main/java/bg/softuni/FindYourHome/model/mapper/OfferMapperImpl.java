@@ -29,7 +29,7 @@ public class OfferMapperImpl implements OfferMapper {
                 setPrice(createOfferDTO.getPrice()).
                 setYearOfConstruction(createOfferDTO.getYearOfConstruction()).
                 setInstant(Instant.now()).
-                setImageUrl("https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500");
+                setImageUrl(createOfferDTO.getImageUrl());
 
         return offerEntity;
     }
@@ -43,6 +43,7 @@ public class OfferMapperImpl implements OfferMapper {
                 .setPrice(offer.getPrice())
                 .setTypeHouse(offer.getTypeHouse())
                 .setYearOfConstruction(offer.getYearOfConstruction())
+                .setImageUrl(offer.getImageUrl())
                 .setSeller(offer.getSeller());
         return offerDetailDTO;
     }

@@ -73,6 +73,18 @@
                    name="performer"/>
             <small th:if="${#fields.hasErrors('description')}" th:errors="*{description}">type="text" class="form-control"</small>
         </div>
+        <div class="form-group">
+            <div class="label-holder text-white textCol d-flex justify-content-center">
+                <label for="image" class="h4 mb-2">image</label>
+            </div>
+            <input type="text"
+                   class="form-control"
+                   id="image"
+                   th:field="*{imageUrl}"
+                   th:errorclass="bg-danger"
+                   name="performer"/>
+            <small th:if="${#fields.hasErrors('description')}" th:errors="*{imageUrl}">type="text" class="form-control"</small>
+        </div>
 
         <div class="button-holder d-flex justify-content-center">
             <button type="submit" class="btn btn-warning  mb-3" value="Add offer">Add offer</button>

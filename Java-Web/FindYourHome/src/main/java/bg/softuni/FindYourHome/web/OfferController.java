@@ -5,6 +5,7 @@ import bg.softuni.FindYourHome.model.dtos.OfferDetailDTO;
 import bg.softuni.FindYourHome.service.OfferService;
 import bg.softuni.FindYourHome.service.UserService;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -27,7 +28,11 @@ public class OfferController {
     }
 
     @GetMapping("/all-offers")
-    public String all(Model model, @PageableDefault(page = 0, size = 3) Pageable pageable) {
+    public String all(Model model, @PageableDefault(
+            sort = "price",
+            direction = Sort.Direction.ASC,
+            page = 0,
+            size = 3) Pageable pageable) {
         model.addAttribute("offers", offerService.getAllOffers(pageable));
         return "all-offers";
     }
