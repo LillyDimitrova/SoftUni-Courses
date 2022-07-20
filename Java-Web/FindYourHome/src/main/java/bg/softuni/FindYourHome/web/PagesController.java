@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.security.Principal;
 import java.util.List;
@@ -46,14 +47,15 @@ public class PagesController {
         return "profile";
     }
     @GetMapping("pages/admins/users")
-    public String allUsers(Model model,  @PageableDefault(
-            sort = "username",
-            direction = Sort.Direction.ASC,
-            page = 0,
-            size = 3) Pageable pageable) {
+    public String allUsers(Model model) {
 
-       model.addAttribute("usersList", userService.getAllUsers(pageable));
+       model.addAttribute("usersList", userService.getAllUsers());
 
         return "users";
+    }
+    @GetMapping("users/remove/{id}")
+    public String removeUser(@PathVariable Long id) {
+        userService.removeUser(id);
+        return "redirect:/pages/admins/users";
     }
 }

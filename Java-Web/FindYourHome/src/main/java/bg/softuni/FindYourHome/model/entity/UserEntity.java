@@ -18,7 +18,7 @@ public class UserEntity extends BaseEntity{
     @Column(unique = true,nullable = false)
     private String email;
 
-    @OneToMany(mappedBy = "seller")
+    @OneToMany(mappedBy = "seller", cascade = CascadeType.ALL)
     private List<OfferEntity> offers = new ArrayList<>();
     @Column(nullable = false)
     private String firstName;

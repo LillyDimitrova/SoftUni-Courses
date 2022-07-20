@@ -10,6 +10,7 @@ import java.time.LocalDate;
 public class OfferDetailDTO {
 
 
+    private Long id;
     private String description;
     private CategoryEnum category;
     private TypeHouseEnum typeHouse;
@@ -18,6 +19,12 @@ public class OfferDetailDTO {
     private String imageUrl;
 
     private UserEntity seller;
+
+
+
+
+    public OfferDetailDTO() {
+    }
 
     public UserEntity getSeller() {
         return seller;
@@ -28,7 +35,13 @@ public class OfferDetailDTO {
         return this;
     }
 
-    public OfferDetailDTO() {
+    public Long getId() {
+        return id;
+    }
+
+    public OfferDetailDTO setId(Long id) {
+        this.id = id;
+        return this;
     }
 
     public String getDescription() {

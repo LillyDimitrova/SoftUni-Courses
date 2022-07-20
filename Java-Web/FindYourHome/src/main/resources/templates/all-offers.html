@@ -32,7 +32,7 @@
                 </li>
             </ul>
             <div class="card-body">
-                <a class="card-link" href="/">Details</a>
+                <a class="card-link" href="#" th:href="@{/offers/{offerId}/details(offerId=*{id})}">Details</a>
             </div>
         </div>
     </div>
@@ -86,7 +86,7 @@
 </div>
 
 <div>
-    <footer> </footer>
+    <footer th:replace="fragments/commons::footer"></footer>
 </div>
 
 </body>

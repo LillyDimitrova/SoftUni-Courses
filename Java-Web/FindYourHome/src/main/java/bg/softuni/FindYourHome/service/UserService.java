@@ -15,6 +15,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -116,8 +117,13 @@ public class UserService {
                 orElseThrow();
     }
 
-    public Page<UserDetailDTO> getAllUsers(Pageable pageable) {
-        return userRepository.findAll(pageable).map(UserDetailDTO::new);
+    public List<UserDetailDTO> getAllUsers() {
+        return userRepository.findAll().stream().map(u -> new UserDetailDTO(u)).collect(Collectors.toList());
+    }
+
+    public void removeUser(Long id) {
+        UserEntity user = userRepository.findById(id).orElseThrow(() -> new UsernameNotFoundException("This user is not found!"));
+        userRepository.delete(user);
     }
 }
 

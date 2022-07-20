@@ -5,7 +5,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>MobiLeLeLe</title>
+    <title>Find your found</title>
     <link rel="stylesheet" href="/css/reset-css.css"/>
     <link rel="stylesheet" href="/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="/css/main.css"/>
@@ -19,10 +19,14 @@
 
 
 <div class="container-fluid container-fluid row justify-content-center">
-    <h5 class="text-center text-white mt-5">
-        UUUUPS!!!! The offer that you are looking for is not available!
+    <h5 class="text-center text-dark mt-8">
+        <div>
+            <h3 class="text-center text-white mt-5">
+                UUUUPS!!!! Something went wrong, please visit the page later!
+            </h3>
+            <img class="card-img-top" src="/img/uups.jpg" alt="Error image" >
+        </div>
 
-        Why don't you <a th:href="@{/offers/search}">search</a> for something else here?
     </h5>
 </div>
 
