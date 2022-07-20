@@ -68,4 +68,6 @@ public class OfferController {
     }
     @GetMapping("/all-offers/{id}/details")
     public String getOfferDetail(@PathVariable("id") Long id) {
+    return "details";
+    }
 }
