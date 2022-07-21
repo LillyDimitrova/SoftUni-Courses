@@ -1,30 +1,22 @@
 package bg.softuni.FindYourHome.web;
 
-import bg.softuni.FindYourHome.model.dtos.UserDetailDTO;
-import bg.softuni.FindYourHome.model.entity.UserEntity;
-import bg.softuni.FindYourHome.model.views.UserProfileView;
+import bg.softuni.FindYourHome.service.OfferService;
 import bg.softuni.FindYourHome.service.UserService;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-
-import java.security.Principal;
-import java.util.List;
 
 @Controller
 
 public class PagesController {
     private final UserService userService;
 
+    private final OfferService offerService;
 
-    public PagesController(UserService userService) {
+    public PagesController(UserService userService, OfferService offerService) {
         this.userService = userService;
+        this.offerService = offerService;
     }
 
 
@@ -49,5 +41,10 @@ public class PagesController {
     public String removeUser(@PathVariable Long id) {
         userService.removeUser(id);
         return "redirect:/pages/admins/users";
+    }
+    @GetMapping("/details/delete/{id}")
+    public String removeOffer(@PathVariable Long id) {
+        offerService.removeOffer(id);
+        return "redirect:/all-offers";
     }
 }

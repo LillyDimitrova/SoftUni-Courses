@@ -65,6 +65,11 @@ public class OfferService {
         return offerRepository.findAllBySellerId(id).stream().map(offerMapper::offerEntityToOfferDetailDTO).collect(Collectors.toList());
     }
 
+    public void removeOffer(Long id) {
+        OfferEntity offer1 = offerRepository.findById(id).orElse(null);
+        offerRepository.delete(offer1);
+    }
+
 //    public List<OfferDetailDTO> getAllOfferByUserName(UserEntity currentUser) {
 //        return currentUser.getOffers().stream().map(o -> new OfferDetailDTO()).collect(Collectors.toList());
 //    }

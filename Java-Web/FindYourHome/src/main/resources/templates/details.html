@@ -29,7 +29,9 @@
             </ul>
             <div class="card-body">
 <!--                <a class="card-link" href="/">Update</a>-->
-                <a class="card-link" href="/">Delete</a>
+<!--                /all-offers/details/{id}/delete-->
+<!--                <a class="card-link" href="/">Delete</a>-->
+                <a class="ml-3 text-danger" th:href="@{/details/delete/{id}(id = *{id})}">Delete</a>
             </div>
         </div>
         <div class="offer card col-sm-2 col-md-3  col-lg-4 m-1 p-0">

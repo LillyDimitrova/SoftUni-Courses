@@ -34,10 +34,12 @@ public class SecurityConfiguration {
                 antMatchers("/all-offers").permitAll().
                         antMatchers("/profile").authenticated().
                 antMatchers("/my-offers").authenticated().
+                antMatchers("/all-offers/details/{id}/delete").authenticated().
                         antMatchers("/pages/moderators").hasRole(RoleEnum.MODERATOR.name()).
                 // pages available only for admins
                         antMatchers("/pages/admins").hasRole(RoleEnum.ADMIN.name()).
-                        antMatchers("users/remove/{id}").hasRole(RoleEnum.ADMIN.name()).
+                        antMatchers("/users/remove/{id}").hasRole(RoleEnum.ADMIN.name()).
+                        antMatchers("/adetails/delete/{id}").hasRole(RoleEnum.ADMIN.name()).
 
                 // all other pages are available for logger in users
                         anyRequest().

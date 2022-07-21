@@ -4,6 +4,7 @@ import bg.softuni.FindYourHome.model.dtos.CreateOfferDTO;
 import bg.softuni.FindYourHome.model.dtos.OfferDetailDTO;
 import bg.softuni.FindYourHome.service.OfferService;
 import bg.softuni.FindYourHome.service.UserService;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -67,8 +68,10 @@ public class OfferController {
         }
     }
     @GetMapping("/all-offers/details/{id}")
-    public String getOfferDetail(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("offer", offerService.getOfferById(id));
-    return "details";
+    public String getOfferDetail(@PathVariable("id") Long id, Model model)  {
+
+            model.addAttribute("offer", offerService.getOfferById(id));
+
+        return "details";
     }
 }
