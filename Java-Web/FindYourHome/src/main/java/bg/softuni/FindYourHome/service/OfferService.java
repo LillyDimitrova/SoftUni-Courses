@@ -11,6 +11,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class OfferService {
     private final OfferRepository offerRepository;
@@ -54,4 +57,15 @@ public class OfferService {
 
     }
 
+    public OfferDetailDTO getOfferById(Long id) {
+        return offerRepository.findById(id).map(offerMapper::offerEntityToOfferDetailDTO).orElse(null);
+    }
+
+    public List<OfferDetailDTO> getAllOfferByUserId(Long id) {
+        return offerRepository.findAllBySellerId(id).stream().map(offerMapper::offerEntityToOfferDetailDTO).collect(Collectors.toList());
+    }
+
+//    public List<OfferDetailDTO> getAllOfferByUserName(UserEntity currentUser) {
+//        return currentUser.getOffers().stream().map(o -> new OfferDetailDTO()).collect(Collectors.toList());
+//    }
 }

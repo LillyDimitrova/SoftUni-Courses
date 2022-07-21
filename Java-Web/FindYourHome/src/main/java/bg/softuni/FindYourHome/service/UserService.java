@@ -118,7 +118,7 @@ public class UserService {
     }
 
     public List<UserDetailDTO> getAllUsers() {
-        return userRepository.findAll().stream().map(u -> new UserDetailDTO(u)).collect(Collectors.toList());
+        return userRepository.findAll().stream().map(UserDetailDTO::new).collect(Collectors.toList());
     }
 
     public void removeUser(Long id) {

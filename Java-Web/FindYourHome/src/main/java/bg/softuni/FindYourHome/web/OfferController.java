@@ -66,8 +66,9 @@ public class OfferController {
             return "added-offer";
         }
     }
-    @GetMapping("/all-offers/{id}/details")
-    public String getOfferDetail(@PathVariable("id") Long id) {
+    @GetMapping("/all-offers/details/{id}")
+    public String getOfferDetail(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("offer", offerService.getOfferById(id));
     return "details";
     }
 }

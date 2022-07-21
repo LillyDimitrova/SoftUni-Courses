@@ -44,7 +44,8 @@ public class OfferMapperImpl implements OfferMapper {
                 .setTypeHouse(offer.getTypeHouse())
                 .setYearOfConstruction(offer.getYearOfConstruction())
                 .setImageUrl(offer.getImageUrl())
-                .setSeller(offer.getSeller());
+                .setId(offer.getId())
+                .setSeller(offer.getSeller().getUsername());
         return offerDetailDTO;
     }
 }

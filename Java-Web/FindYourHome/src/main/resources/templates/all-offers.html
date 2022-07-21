@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="en"
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
->
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 
 <head th:replace="fragments/commons::head"></head>
 
@@ -25,14 +26,13 @@
             </div>
             <ul class="offer-details list-group list-group-flush">
                 <li class="list-group-item">
-                    <div class="card-text"><span>• Year of construction <th:block th:text="*{yearOfConstruction}"></th:block> </span></div>
                     <div class="card-text"><span>• Price <th:block th:text="*{price}"></th:block></span></div>
                     <div class="card-text"><span>• Type <th:block th:text="*{category}"></th:block></span></div>
-                    <div class="card-text"><span>• Seller <th:block th:text="*{seller.getUsername()}"></th:block></span></div>
+                    <div class="card-text"><span>• Seller <th:block th:text="*{seller}"></th:block></span></div>
                 </li>
             </ul>
             <div class="card-body">
-                <a class="card-link" href="#" th:href="@{/offers/{offerId}/details(offerId=*{id})}">Details</a>
+                <a class="card-link" href="#" th:href="@{/all-offers/details/{id}(id = *{id})}">Details</a>
             </div>
         </div>
     </div>

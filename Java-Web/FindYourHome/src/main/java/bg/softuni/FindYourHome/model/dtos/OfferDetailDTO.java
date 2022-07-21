@@ -18,7 +18,7 @@ public class OfferDetailDTO {
     private BigDecimal price;
     private String imageUrl;
 
-    private UserEntity seller;
+    private String seller;
 
 
 
@@ -26,11 +26,12 @@ public class OfferDetailDTO {
     public OfferDetailDTO() {
     }
 
-    public UserEntity getSeller() {
+
+    public String getSeller() {
         return seller;
     }
 
-    public OfferDetailDTO setSeller(UserEntity seller) {
+    public OfferDetailDTO setSeller(String seller) {
         this.seller = seller;
         return this;
     }

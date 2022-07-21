@@ -32,7 +32,8 @@ public class SecurityConfiguration {
                 // everyone can login and register
                         antMatchers("/", "/users/login", "/users/register").permitAll().
                 antMatchers("/all-offers").permitAll().
-                        antMatchers("pages/profile").authenticated().
+                        antMatchers("/profile").authenticated().
+                antMatchers("/my-offers").authenticated().
                         antMatchers("/pages/moderators").hasRole(RoleEnum.MODERATOR.name()).
                 // pages available only for admins
                         antMatchers("/pages/admins").hasRole(RoleEnum.ADMIN.name()).
