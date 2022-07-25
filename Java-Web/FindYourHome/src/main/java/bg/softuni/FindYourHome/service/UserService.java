@@ -8,8 +8,9 @@ import bg.softuni.FindYourHome.model.enums.RoleEnum;
 import bg.softuni.FindYourHome.model.mapper.UserMapper;
 import bg.softuni.FindYourHome.repository.RoleEntityRepository;
 import bg.softuni.FindYourHome.repository.UserRepository;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.cache.annotation.Cacheable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -25,6 +26,9 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserService {
+
+    private static final Logger LOGGER =
+            LoggerFactory.getLogger(UserService.class);
     private final UserRepository userRepository;
     private final RoleEntityRepository roleEntityRepository;
     private final UserDetailsService userDetailsService;
@@ -112,12 +116,17 @@ public class UserService {
                 setAuthentication(auth);
     }
 
+    @Cacheable("users")
     public UserEntity getCurrentUser(UserDetails userDetails) {
+        LOGGER.info("Getting student by name {}.", userDetails.getUsername());
        return userRepository.findByEmail(userDetails.getUsername()).
                 orElseThrow();
     }
 
+    @Cacheable("users")
     public List<UserDetailDTO> getAllUsers() {
+        LOGGER.info("Getting all users.");
+
         return userRepository.findAll().stream().map(UserDetailDTO::new).collect(Collectors.toList());
     }
 
