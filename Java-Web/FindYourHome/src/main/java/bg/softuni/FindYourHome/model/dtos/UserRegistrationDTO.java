@@ -15,7 +15,7 @@ import javax.validation.constraints.*;
 
 public class UserRegistrationDTO {
 
-    @NotBlank(message = "Username should be provided")
+    @NotNull(message = "Username should be provided")
     @Size(min = 3, max = 20, message = "Username length must be between 3 and 20 characters")
     @UniqueUsername(message = "Username should be unique.")
     private String username;

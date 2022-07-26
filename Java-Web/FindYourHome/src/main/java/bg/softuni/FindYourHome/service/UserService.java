@@ -97,7 +97,7 @@ public class UserService {
         this.userRepository.save(newUser);
         emailService.sendRegistrationEmail(newUser.getEmail(),
                 newUser.getFirstName() + " " + newUser.getLastName());
-        login(newUser);
+//        login(newUser);
 
     }
     private void login(UserEntity userEntity) {

@@ -23,11 +23,9 @@
                                class="form-control"
                                id="username"
                                th:field="*{username}"
-                               th:errorclass="is-invalid"
+                               th:errorclass="bg-danger"
                                name="username"/>
                         <small th:if="${#fields.hasErrors('username')}" th:errors="*{username}">type="text" class="form-control"</small>
-<!--                        th:each="err : ${#fields.errors('email')}"-->
-<!--                        th:text="${err}"-->
                     </div>
                     <div class="form-group col-md-6 mb-3">
                         <label for="firstName" class="text-white font-weight-bold">First Name</label>
@@ -50,8 +48,6 @@
                                placeholder="Last name"/>
                         <small th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">type="text" class="form-control"</small>
                     </div>
-                </div>
-                <div class="row">
                     <div class="form-group col-md-6 mb-3">
                         <label for="email" class="text-white font-weight-bold">Email</label>
                         <input id="email"
@@ -64,11 +60,9 @@
                                     <div
                                             th:each="err : ${#fields.errors('email')}"
                                             th:text="${err}">
-
                                     </div>
                                 </div>
 <!--                        <small th:if="${#fields.hasErrors('email')}" th:errors="*{email}">type="text" class="form-control"</small>-->
-
                     </div>
                     <div class="form-group col-md-6 mb-3">
                         <label for="password" class="text-white font-weight-bold">Password</label>
@@ -80,7 +74,6 @@
                                placeholder="Password"/>
                         <small th:if="${#fields.hasErrors('password')}" th:errors="*{password}">type="text" class="form-control"</small>
                     </div>
-                </div>
                 <div class="form-group">
                     <label for="confirmPassword" class="text-white font-weight-bold">Password</label>
                     <input
@@ -92,7 +85,7 @@
                             placeholder="Confirm password"/>
                     <small th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}">type="text" class="form-control"</small>
                 </div>
-
+                </div>
                 <div class="button-holder d-flex justify-content-center">
                     <button type="submit" class="btn btn-warning  mb-3" value="Register">Register</button>
                 </div>
