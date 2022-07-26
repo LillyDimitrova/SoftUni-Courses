@@ -1,32 +1,40 @@
 package bg.softuni.FindYourHome.model.dtos;
 
+import bg.softuni.FindYourHome.model.validator.FieldMatch;
 import bg.softuni.FindYourHome.model.validator.UniqueUserEmail;
 import bg.softuni.FindYourHome.model.validator.UniqueUsername;
 import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.validation.constraints.*;
 
+@FieldMatch(
+        first = "password",
+        second = "confirmPassword",
+        message = "Passwords do not match."
+)
+
 public class UserRegistrationDTO {
 
-    @NotEmpty(message = "Username should be provided")
+    @NotBlank(message = "Username should be provided")
     @Size(min = 3, max = 20, message = "Username length must be between 3 and 20 characters")
     @UniqueUsername(message = "Username should be unique.")
     private String username;
-
+    @NotBlank
     @Size(min = 3, max = 20, message = "Username length must be between 3 and 20 characters")
     private String firstName;
 
+    @NotBlank
     @Size(min = 3, max = 20, message = "Username length must be between 3 and 20 characters")
     private String lastName;
 
-    @NotEmpty(message = "User email should be provided")
+    @NotBlank(message = "User email should be provided")
     @Email(message = "User email should be valid. ")
     @UniqueUserEmail(message = "User email should be unique.")
     private String email;
-
+    @NotBlank
     @Size(min = 3, max = 20, message = "Password length must be between 3 and 20 characters")
     private String password;
-
+    @NotBlank
     @Size(min = 3, max = 20, message = "Password length must be between 3 and 20 characters")
     private String confirmPassword;
 

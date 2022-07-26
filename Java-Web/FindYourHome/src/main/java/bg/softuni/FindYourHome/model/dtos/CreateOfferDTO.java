@@ -6,25 +6,23 @@ import bg.softuni.FindYourHome.model.enums.TypeHouseEnum;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Column;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PastOrPresent;
-import javax.validation.constraints.Positive;
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class CreateOfferDTO {
 
-    @NotNull
+    @NotBlank(message = "Please enter a description!")
     private String description;
-    @NotNull
+    @NotNull(message = "Please choose type!")
     private TypeHouseEnum type;
-    @NotNull
+    @NotNull(message = "Please choose category!")
     private CategoryEnum category;
 
-    @NotNull
+    @NotEmpty(message = "Add a photo!")
     private String imageUrl;
-    @NotNull
+    @NotNull(message = "Price must be positive number!")
     @Positive
     private BigDecimal price;
 

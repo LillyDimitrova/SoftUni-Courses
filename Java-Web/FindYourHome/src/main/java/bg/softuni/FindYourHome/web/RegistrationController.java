@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @Controller
@@ -36,8 +38,6 @@ public class RegistrationController {
     @PostMapping("/register")
     public String register(@Valid UserRegistrationDTO userRegistrationDTO,
                            BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-
-
 
         if (bindingResult.hasErrors() ) {
             redirectAttributes.addFlashAttribute("userRegistrationDTO", userRegistrationDTO);
