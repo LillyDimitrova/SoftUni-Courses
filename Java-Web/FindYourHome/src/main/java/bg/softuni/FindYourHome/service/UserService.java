@@ -53,13 +53,13 @@ public class UserService {
     public void init() {
         if (userRepository.count() == 0 && roleEntityRepository.count() == 0) {
             RoleEntity adminRole = new RoleEntity().setRole(RoleEnum.ADMIN);
-            RoleEntity moderatorRole = new RoleEntity().setRole(RoleEnum.MODERATOR);
+//            RoleEntity moderatorRole = new RoleEntity().setRole(RoleEnum.MODERATOR);
             RoleEntity userRole = new RoleEntity().setRole(RoleEnum.USER);
             userRole = roleEntityRepository.save(userRole);
             adminRole = roleEntityRepository.save(adminRole);
-            moderatorRole = roleEntityRepository.save(moderatorRole);
-            initAdmin(List.of(adminRole, moderatorRole));
-            initModerator(List.of(moderatorRole));
+//            moderatorRole = roleEntityRepository.save(moderatorRole);
+            initAdmin(List.of(adminRole));
+//            initModerator(List.of(moderatorRole));
         }
     }
     private void initAdmin(List<RoleEntity> roles) {
@@ -74,19 +74,19 @@ public class UserService {
         userRepository.save(admin);
 
     }
-    private void initModerator(List<RoleEntity> roles) {
-        UserEntity moderator = new UserEntity().
-                setRoles(roles).
-                setUsername("moderator").
-                setFirstName("Moderator").
-                setLastName("Moderatorov").
-                setEmail("moderator@example.com").
-                setPassword(passwordEncoder.encode("topsecret"));
-
-       this.userRepository.save(moderator);
-       login(moderator);
-
-    }
+//    private void initModerator(List<RoleEntity> roles) {
+//        UserEntity moderator = new UserEntity().
+//                setRoles(roles).
+//                setUsername("moderator").
+//                setFirstName("Moderator").
+//                setLastName("Moderatorov").
+//                setEmail("moderator@example.com").
+//                setPassword(passwordEncoder.encode("topsecret"));
+//
+//       this.userRepository.save(moderator);
+//       login(moderator);
+//
+//    }
 
     public void registerAndLogin(UserRegistrationDTO userRegistrationDTO) {
 
