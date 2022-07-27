@@ -12,6 +12,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.List;
 import java.util.Optional;
@@ -63,6 +64,9 @@ class CurrentUserDetailServiceTest {
 
     @Test
     void testLoadUserByUsername_UserDoesNotExist() {
+
+        Assertions.assertThrows(UsernameNotFoundException.class, () -> toTest.loadUserByUsername("non-existant@example.com"));
+
 
     }
 }
