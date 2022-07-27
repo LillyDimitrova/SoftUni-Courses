@@ -19,11 +19,11 @@ public class UserRegistrationDTO {
     @Size(min = 3, max = 20, message = "Username length must be between 3 and 20 characters")
     @UniqueUsername(message = "Username should be unique.")
     private String username;
-    @NotBlank
+
     @Size(min = 3, max = 20, message = "Username length must be between 3 and 20 characters")
     private String firstName;
 
-    @NotBlank
+
     @Size(min = 3, max = 20, message = "Username length must be between 3 and 20 characters")
     private String lastName;
 
@@ -31,10 +31,10 @@ public class UserRegistrationDTO {
     @Email(message = "User email should be valid. ")
     @UniqueUserEmail(message = "User email should be unique.")
     private String email;
-    @NotBlank
+
     @Size(min = 3, max = 20, message = "Password length must be between 3 and 20 characters")
     private String password;
-    @NotBlank
+
     @Size(min = 3, max = 20, message = "Password length must be between 3 and 20 characters")
     private String confirmPassword;
 
