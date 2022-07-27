@@ -27,7 +27,7 @@ public class CurrentUserDetailService implements UserDetailsService {
         return userRepository.
                 findByUsername(username).
                 map(this::map).
-                orElseThrow(() -> new UsernameNotFoundException("User with email " + username + " not found!"));
+                orElseThrow(() -> new UsernameNotFoundException("User with username " + username + " not found!"));
     }
 
     private UserDetails map(UserEntity userEntity) {
@@ -42,12 +42,6 @@ public class CurrentUserDetailService implements UserDetailsService {
                         stream().
                         map(this::map).
                         collect(Collectors.toList()));
-//        return User.builder().
-//                username(userEntity.getUsername()).
-//                password(userEntity.getPassword()).
-//
-//                authorities(userEntity.getRoles().stream().map(this::map).collect(Collectors.toList())).
-//                build();
     }
 
     private GrantedAuthority map(RoleEntity userRole) {

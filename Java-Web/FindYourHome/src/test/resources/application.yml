@@ -7,7 +7,6 @@ spring:
     init:
       mode: never
 
-mail:
   mail:
     from: me@localhost
     host: localhost
@@ -15,7 +14,7 @@ mail:
     port: 1025
     protocol: smtp
     smtp:
-      auth: false
-      starttls:
-        enable: false
+    auth: false
+    starttls:
+    enable: false
     username: ''
