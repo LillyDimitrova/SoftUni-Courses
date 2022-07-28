@@ -40,15 +40,6 @@ public class HomeController{
         model.addAttribute("user", userProfileView);
         return "profile";
     }
-//    @GetMapping("/all-offers")
-//    public String all(Model model, @PageableDefault(
-//            sort = "price",
-//            direction = Sort.Direction.ASC,
-//            page = 0,
-//            size = 3) Pageable pageable) {
-//        model.addAttribute("offers", offerService.getAllOffers(pageable));
-//        return "all-offers";
-//    }
 
     @GetMapping("/my-offers")
     public String getMyOffers(Principal principal, Model model, @AuthenticationPrincipal UserDetails userDetails) {

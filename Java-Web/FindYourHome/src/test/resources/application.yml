@@ -2,10 +2,7 @@ spring:
   datasource:
       driverClassName: org.hsqldb.jdbc.JDBCDriver
       password: root123
-      url: jdbc:mysql://localhost:3306/FindYourHome?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8
       username: root
-    mem: testdb; sql.syntax_mys=true
-
   jpa:
     hibernate:
       ddl-auto: create-drop
