@@ -14,10 +14,10 @@
         <div class="row mt-1 mb-2">
             <div class="col-6 mt-1 mb-1">
 
-                <h3 class="mySticky bg-gray text-dark  mb-0 mt-2">Users</h3>
-                <div class="bg-dark rounded " style="height: 20vh; overflow: auto">
-                    <div th:each="user : ${usersList}" th:object="${user}" class="mt-1 rounded badge-info">
-                        <img class="mr-1" src="/img/profilePic.jpg" alt="Pop" width="30px" height="30px">
+                <h3 class="text-center text-dark mt-5">Users</h3>
+                <div class="table-info " style="margin-top: 20px; overflow: auto">
+                    <div th:each="user : ${usersList}" th:object="${user}" class="mt-3 rounded badge-dark">
+                        <img class="mr-1" src="/img/profilePic.jpg" alt="" width="30px" height="30px">
                         <div class="card-text"><span>• Username: <th:block th:text="*{username}"></th:block> </span></div>
                         <div class="card-text"><span>• Email: <th:block th:text="*{email}"></th:block></span></div>
                         <div class="card-text"><span>• First name: <th:block th:text="*{firstName}"></th:block></span></div>
