@@ -2,6 +2,7 @@ package bg.softuni.FindYourHome.web;
 
 import bg.softuni.FindYourHome.model.dtos.CreateOfferDTO;
 import bg.softuni.FindYourHome.model.dtos.OfferDetailDTO;
+import bg.softuni.FindYourHome.model.dtos.SearchOfferDTO;
 import bg.softuni.FindYourHome.service.OfferService;
 import bg.softuni.FindYourHome.service.UserService;
 import org.springframework.data.crossstore.ChangeSetPersister;
@@ -73,5 +74,29 @@ public class OfferController {
             model.addAttribute("offer", offerService.getOfferById(id));
 
         return "details";
+    }
+
+    @GetMapping("/all-offers/search")
+    public String searchQuery(@Valid SearchOfferDTO searchOfferDTO,
+                              BindingResult bindingResult,
+                              Model model) {
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("searchOfferModel", searchOfferDTO);
+            model.addAttribute(
+                    "org.springframework.validation.BindingResult.searchOfferModel",
+                    bindingResult);
+            return "offer-search";
+        }
+
+        if (!model.containsAttribute("searchOfferModel")) {
+            model.addAttribute("searchOfferModel", searchOfferDTO);
+        }
+
+        if (!searchOfferDTO.isEmpty()) {
+            model.addAttribute("offers", offerService.searchOffer(searchOfferDTO));
+        }
+
+        return "offer-search";
     }
 }

@@ -51,6 +51,9 @@
                     <a class="nav-link" th:text="#{navbar_profile}"
                        th:href="@{/profile}">Profile</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:text="#{navbar_search}" href="/all-offers/search">Search</a>
+                </li>
                 <li class="nav-item"
                     sec:authorize="isAuthenticated()">
                     <div class="form-inline my-2 my-lg-0 px-3">
