@@ -27,6 +27,9 @@ public class OfferEntity extends BaseEntity{
     @Column(nullable = false)
     private TypeHouseEnum typeHouse;
 
+    @ManyToOne
+    private CityEntity city;
+
     @Column(nullable = false)
     private LocalDate yearOfConstruction;
 
@@ -36,7 +39,7 @@ public class OfferEntity extends BaseEntity{
 
     private Instant instant;
 
-    @Column
+    @Column(columnDefinition = "LONGTEXT")
     private String imageUrl;
 
     public OfferEntity() {
@@ -47,6 +50,14 @@ public class OfferEntity extends BaseEntity{
         return category;
     }
 
+    public CityEntity getCity() {
+        return city;
+    }
+
+    public OfferEntity setCity(CityEntity city) {
+        this.city = city;
+        return this;
+    }
 
     public OfferEntity setCategory(CategoryEnum category) {
         this.category = category;

@@ -22,7 +22,7 @@
                         <div class="card-text"><span>• Email: <th:block th:text="*{email}"></th:block></span></div>
                         <div class="card-text"><span>• First name: <th:block th:text="*{firstName}"></th:block></span></div>
                         <div class="card-text"><span>• Last name: <th:block th:text="*{lastName}"></th:block></span></div>
-                        <div class="card-text"><span>• Role: <th:block th:text="*{role.toString()}"></th:block></span></div>
+                        <div class="card-text"><span>• Role: <th:block th:text="*{roles}"></th:block></span></div>
                         <div class="card-text"><span>• Count of offers: <th:block th:text="*{countOfOffers}"></th:block></span></div>
                         <a class="ml-3 text-danger" th:href="@{/users/remove/{id}(id = *{id})}">Remove</a>
                     </div>

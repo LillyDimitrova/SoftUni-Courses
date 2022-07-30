@@ -4,12 +4,14 @@ import bg.softuni.FindYourHome.model.entity.RoleEntity;
 import bg.softuni.FindYourHome.model.entity.UserEntity;
 import bg.softuni.FindYourHome.model.enums.RoleEnum;
 
+import java.util.List;
+
 public class UserDetailDTO {
 
 
     private Long id;
     private String username;
-    private RoleEntity role;
+    private List<RoleEntity> roles;
     private String email;
     private String firstName;
     private String lastName;
@@ -21,7 +23,7 @@ public class UserDetailDTO {
 
     public UserDetailDTO(UserEntity user) {
         this.username = user.getUsername();
-        this.role = user.getRoles().get(0);
+        this.roles = user.getRoles();
         this.email = user.getEmail();
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
@@ -56,12 +58,12 @@ public class UserDetailDTO {
         return this;
     }
 
-    public RoleEntity getRole() {
-        return role;
+    public List<RoleEntity> getRoles() {
+        return roles;
     }
 
-    public UserDetailDTO setRole(RoleEntity role) {
-        this.role = role;
+    public UserDetailDTO setRoles(List<RoleEntity> roles) {
+        this.roles = roles;
         return this;
     }
 

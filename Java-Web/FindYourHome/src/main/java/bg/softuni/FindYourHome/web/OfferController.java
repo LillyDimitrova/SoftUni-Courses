@@ -82,15 +82,15 @@ public class OfferController {
                               Model model) {
 
         if (bindingResult.hasErrors()) {
-            model.addAttribute("searchOfferModel", searchOfferDTO);
+            model.addAttribute("searchOffer", searchOfferDTO);
             model.addAttribute(
                     "org.springframework.validation.BindingResult.searchOfferModel",
                     bindingResult);
             return "offer-search";
         }
 
-        if (!model.containsAttribute("searchOfferModel")) {
-            model.addAttribute("searchOfferModel", searchOfferDTO);
+        if (!model.containsAttribute("searchOffer")) {
+            model.addAttribute("searchOffer", searchOfferDTO);
         }
 
         if (!searchOfferDTO.isEmpty()) {

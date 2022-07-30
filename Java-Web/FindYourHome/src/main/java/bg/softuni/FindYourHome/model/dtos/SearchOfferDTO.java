@@ -2,9 +2,21 @@ package bg.softuni.FindYourHome.model.dtos;
 
 public class SearchOfferDTO {
 
+    private String City;
+
     private Integer minPrice;
 
     private Integer maxPrice;
+
+
+    public String getCity() {
+        return City;
+    }
+
+    public SearchOfferDTO setCity(String city) {
+        City = city;
+        return this;
+    }
 
     public Integer getMinPrice() {
         return minPrice;
@@ -25,16 +37,8 @@ public class SearchOfferDTO {
     }
 
     public boolean isEmpty() {
-        return
+        return (getCity() == null || getCity().isEmpty()) &&
                 minPrice == null &&
                 maxPrice == null;
-    }
-
-    @Override
-    public String toString() {
-        return "SearchOfferDTO{" +
-                "minPrice=" + minPrice +
-                ", maxPrice=" + maxPrice +
-                '}';
     }
 }

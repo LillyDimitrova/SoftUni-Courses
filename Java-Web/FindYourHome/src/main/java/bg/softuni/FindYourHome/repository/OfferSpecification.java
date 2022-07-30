@@ -10,7 +10,6 @@ import javax.persistence.criteria.Root;
 import javax.persistence.criteria.Predicate;
 
 public class OfferSpecification implements Specification<OfferEntity> {
-
     private final SearchOfferDTO searchOfferDTO;
 
     public OfferSpecification(SearchOfferDTO searchOfferDTO) {
@@ -22,6 +21,12 @@ public class OfferSpecification implements Specification<OfferEntity> {
                                  CriteriaQuery<?> query,
                                  CriteriaBuilder cb) {
         Predicate p = cb.conjunction();
+
+        if (searchOfferDTO.getCity() != null && !searchOfferDTO.getCity().isEmpty()) {
+            p.getExpressions().add(
+                    cb.and(cb.equal(root.join("city").get("name"), searchOfferDTO.getCity()))
+            );
+        }
 
         if (searchOfferDTO.getMinPrice() != null) {
             p.getExpressions().add(

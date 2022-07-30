@@ -32,11 +32,6 @@
                        th:href="@{/my-offers}">My offers</a>
                 </li>
                 <li class="nav-item"
-                    sec:authorize="hasRole('MODERATOR')">
-                    <a class="nav-link" th:text="#{navbar_moderators}"
-                       th:href="@{/pages/moderators}">Moderators</a>
-                </li>
-                <li class="nav-item"
                     sec:authorize="hasRole('ADMIN')">
                     <a class="nav-link" th:text="#{navbar_admins}"
                        th:href="@{/pages/admins}">Admins</a>

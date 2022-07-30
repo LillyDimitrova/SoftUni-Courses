@@ -1,10 +1,10 @@
 package bg.softuni.FindYourHome.model.dtos;
 
 
-import bg.softuni.FindYourHome.model.entity.UserEntity;
 import bg.softuni.FindYourHome.model.enums.CategoryEnum;
 import bg.softuni.FindYourHome.model.enums.TypeHouseEnum;
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.time.LocalDate;
 
 public class OfferDetailDTO {
@@ -17,15 +17,32 @@ public class OfferDetailDTO {
     private LocalDate yearOfConstruction;
     private BigDecimal price;
     private String imageUrl;
+    private Instant addedOn;
+
+    private String city;
 
     private String seller;
-
-
-
 
     public OfferDetailDTO() {
     }
 
+    public String getCity() {
+        return city;
+    }
+
+    public OfferDetailDTO setCity(String city) {
+        this.city = city;
+        return this;
+    }
+
+    public Instant getAddedOn() {
+        return addedOn;
+    }
+
+    public OfferDetailDTO setAddedOn(Instant addedOn) {
+        this.addedOn = addedOn;
+        return this;
+    }
 
     public String getSeller() {
         return seller;

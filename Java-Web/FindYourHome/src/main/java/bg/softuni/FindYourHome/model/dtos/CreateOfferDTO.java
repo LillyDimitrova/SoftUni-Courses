@@ -1,15 +1,13 @@
 package bg.softuni.FindYourHome.model.dtos;
 
-import bg.softuni.FindYourHome.model.entity.UserEntity;
+import bg.softuni.FindYourHome.model.entity.CityEntity;
 import bg.softuni.FindYourHome.model.enums.CategoryEnum;
 import bg.softuni.FindYourHome.model.enums.TypeHouseEnum;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Column;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public class CreateOfferDTO {
 
@@ -20,6 +18,8 @@ public class CreateOfferDTO {
     @NotNull(message = "Please choose category!")
     private CategoryEnum category;
 
+    @NotNull(message = "Please choose city!")
+    private String city;
     @NotEmpty(message = "Add a photo!")
     private String imageUrl;
     @NotNull(message = "Price must be positive number!")
@@ -36,6 +36,15 @@ public class CreateOfferDTO {
 
     public CreateOfferDTO setDescription(String description) {
         this.description = description;
+        return this;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public CreateOfferDTO setCity(String city) {
+        this.city = city;
         return this;
     }
 

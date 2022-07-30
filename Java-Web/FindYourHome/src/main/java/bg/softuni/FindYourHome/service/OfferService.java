@@ -24,24 +24,32 @@ public class OfferService {
     private final UserRepository userRepository;
 
     private final UserService userService;
+    private final CitiesRepository citiesRepository;
+    private final CityService cityService;
 
 
 @Autowired
-    public OfferService(OfferRepository offerRepository, OfferMapper offerMapper, TypeHouseRepository typeHouseRepository, CategoryRepository categoryRepository, UserRepository userRepository, UserService userService) {
+    public OfferService(OfferRepository offerRepository, OfferMapper offerMapper, TypeHouseRepository typeHouseRepository, CategoryRepository categoryRepository, UserRepository userRepository, UserService userService, CitiesRepository citiesRepository, CityService cityService) {
         this.offerRepository = offerRepository;
     this.offerMapper = offerMapper;
         this.typeHouseRepository = typeHouseRepository;
         this.categoryRepository = categoryRepository;
         this.userRepository = userRepository;
 
+
     this.userService = userService;
+    this.citiesRepository = citiesRepository;
+    this.cityService = cityService;
 }
     OfferEntity offer = new OfferEntity();
     public boolean create( CreateOfferDTO createOfferDTO, UserDetails userDetails) {
          offer = offerMapper.addOfferDtoToOfferEntity(createOfferDTO);
 
+        CityEntity city = cityService.getCityByName(createOfferDTO.getCity());
+
         UserEntity seller = userRepository.findByEmail(userDetails.getUsername()).
         orElseThrow();
+        offer.setCity(city);
         offer.setSeller(seller);
 
         offerRepository.save(offer);
