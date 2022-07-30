@@ -1,6 +1,6 @@
-package bg.softuni.FindYourHome.model.views;
+package bg.softuni.FindYourHome.model.dtos;
 
-public class UserProfileView {
+public class UserProfileDTO {
 
 
     private String username;
@@ -10,10 +10,10 @@ public class UserProfileView {
     private int countOfOffers;
 
 
-    public UserProfileView() {
+    public UserProfileDTO() {
     }
 
-    public UserProfileView(String username, String email, String firstName, String lastName, int countOfOffers) {
+    public UserProfileDTO(String username, String email, String firstName, String lastName, int countOfOffers) {
         this.username = username;
         this.email = email;
         this.firstName = firstName;
@@ -21,22 +21,22 @@ public class UserProfileView {
         this.countOfOffers = countOfOffers;
     }
 
-    public UserProfileView setUsername(String username) {
+    public UserProfileDTO setUsername(String username) {
         this.username = username;
         return this;
     }
 
-    public UserProfileView setEmail(String email) {
+    public UserProfileDTO setEmail(String email) {
         this.email = email;
         return this;
     }
 
-    public UserProfileView setFirstName(String firstName) {
+    public UserProfileDTO setFirstName(String firstName) {
         this.firstName = firstName;
         return this;
     }
 
-    public UserProfileView setLastName(String lastName) {
+    public UserProfileDTO setLastName(String lastName) {
         this.lastName = lastName;
         return this;
     }
@@ -45,7 +45,7 @@ public class UserProfileView {
         return countOfOffers;
     }
 
-    public UserProfileView setCountOfOffers(int countOfOffers) {
+    public UserProfileDTO setCountOfOffers(int countOfOffers) {
         this.countOfOffers = countOfOffers;
         return this;
     }
