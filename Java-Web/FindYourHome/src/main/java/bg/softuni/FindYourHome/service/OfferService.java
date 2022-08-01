@@ -4,6 +4,7 @@ import bg.softuni.FindYourHome.model.dtos.CreateOfferDTO;
 import bg.softuni.FindYourHome.model.dtos.OfferDetailDTO;
 import bg.softuni.FindYourHome.model.dtos.SearchOfferDTO;
 import bg.softuni.FindYourHome.model.entity.*;
+import bg.softuni.FindYourHome.model.error.ObjectNotFoundException;
 import bg.softuni.FindYourHome.model.mapper.OfferMapper;
 import bg.softuni.FindYourHome.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,12 +63,12 @@ public class OfferService {
     return offerRepository.findAll(pageable).map(offerMapper::offerEntityToOfferDetailDTO);
     }
     public OfferDetailDTO getCurrentNewOffer(){
-       return offerRepository.findById(offer.getId()).map(offerMapper::offerEntityToOfferDetailDTO).orElse(null);
+       return offerRepository.findById(offer.getId()).map(offerMapper::offerEntityToOfferDetailDTO).orElseThrow(() -> new ObjectNotFoundException(offer.getId()));
 
     }
 
     public OfferDetailDTO getOfferById(Long id) {
-        return offerRepository.findById(id).map(offerMapper::offerEntityToOfferDetailDTO).orElse(null);
+        return offerRepository.findById(id).map(offerMapper::offerEntityToOfferDetailDTO).orElseThrow(() -> new ObjectNotFoundException(id));
     }
 
     public List<OfferDetailDTO> getAllOfferByUserId(Long id) {
@@ -75,7 +76,8 @@ public class OfferService {
     }
 
     public void removeOffer(Long id) {
-        OfferEntity offer1 = offerRepository.findById(id).orElse(null);
+        OfferEntity offer1 = offerRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException(id));
+
         offerRepository.delete(offer1);
     }
 

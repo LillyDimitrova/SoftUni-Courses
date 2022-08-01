@@ -5,6 +5,7 @@ import bg.softuni.FindYourHome.model.dtos.UserRegistrationDTO;
 import bg.softuni.FindYourHome.model.entity.RoleEntity;
 import bg.softuni.FindYourHome.model.entity.UserEntity;
 import bg.softuni.FindYourHome.model.enums.RoleEnum;
+import bg.softuni.FindYourHome.model.error.ObjectNotFoundException;
 import bg.softuni.FindYourHome.model.mapper.UserMapper;
 import bg.softuni.FindYourHome.repository.RoleEntityRepository;
 import bg.softuni.FindYourHome.repository.UserRepository;
@@ -115,7 +116,7 @@ public class UserService {
     }
 
     public void removeUser(Long id) {
-        UserEntity user = userRepository.findById(id).orElseThrow(() -> new UsernameNotFoundException("This user is not found!"));
+        UserEntity user = userRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException(id));
         userRepository.delete(user);
     }
 }

@@ -3,6 +3,8 @@ package bg.softuni.FindYourHome.web;
 import bg.softuni.FindYourHome.model.dtos.CreateOfferDTO;
 import bg.softuni.FindYourHome.model.dtos.OfferDetailDTO;
 import bg.softuni.FindYourHome.model.dtos.SearchOfferDTO;
+import bg.softuni.FindYourHome.model.entity.OfferEntity;
+import bg.softuni.FindYourHome.model.error.ObjectNotFoundException;
 import bg.softuni.FindYourHome.service.OfferService;
 import bg.softuni.FindYourHome.service.UserService;
 import org.springframework.data.crossstore.ChangeSetPersister;

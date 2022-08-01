@@ -35,11 +35,13 @@ public class PagesController {
     }
     @GetMapping("users/remove/{id}")
     public String removeUser(@PathVariable Long id) {
+
         userService.removeUser(id);
         return "redirect:/pages/admins/users";
     }
     @GetMapping("/details/delete/{id}")
     public String removeOffer(@PathVariable Long id) {
+
         offerService.removeOffer(id);
         return "redirect:/all-offers";
     }
