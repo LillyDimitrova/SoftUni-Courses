@@ -16,10 +16,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
@@ -70,13 +67,6 @@ public class OfferController {
             return "added-offer";
         }
     }
-    @GetMapping("/all-offers/details/{id}")
-    public String getOfferDetail(@PathVariable("id") Long id, Model model)  {
-
-            model.addAttribute("offer", offerService.getOfferById(id));
-
-        return "details";
-    }
 
     @GetMapping("/all-offers/search")
     public String searchQuery(@Valid SearchOfferDTO searchOfferDTO,
@@ -100,5 +90,19 @@ public class OfferController {
         }
 
         return "offer-search";
+    }
+
+    @GetMapping("/all-offers/details/{id}")
+    public String getOfferDetail(@PathVariable("id") Long id, Model model)  {
+
+        model.addAttribute("offer", offerService.getOfferById(id));
+
+        return "details";
+    }
+    @DeleteMapping("/details/delete/{id}")
+    public String removeOffer(@PathVariable Long id) {
+
+        offerService.removeOffer(id);
+        return "redirect:/all-offers";
     }
 }

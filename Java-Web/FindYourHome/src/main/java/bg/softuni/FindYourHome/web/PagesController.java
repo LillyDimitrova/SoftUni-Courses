@@ -39,10 +39,5 @@ public class PagesController {
         userService.removeUser(id);
         return "redirect:/pages/admins/users";
     }
-    @GetMapping("/details/delete/{id}")
-    public String removeOffer(@PathVariable Long id) {
 
-        offerService.removeOffer(id);
-        return "redirect:/all-offers";
-    }
 }
