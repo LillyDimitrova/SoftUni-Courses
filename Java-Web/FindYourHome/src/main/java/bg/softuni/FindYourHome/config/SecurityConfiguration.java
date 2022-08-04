@@ -31,7 +31,7 @@ public class SecurityConfiguration {
                         requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll().
                 // everyone can login and register
                         antMatchers("/", "/users/login", "/users/register").permitAll().
-                antMatchers("/all-offers").permitAll().
+                antMatchers("/all-offers/**").permitAll().
                         antMatchers("/profile").authenticated().
                 antMatchers("/my-offers").authenticated().
 //                antMatchers("/all-offers/details/{id}/delete").authenticated().
