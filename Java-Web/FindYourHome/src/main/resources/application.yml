@@ -8,6 +8,10 @@ spring:
         database-platform: org.hibernate.dialect.MySQL8Dialect
         hibernate:
             ddl-auto: update
+    mvc:
+        hiddenmethod:
+            filter:
+                enabled: true
     mail:
         from: me@localhost
         host: localhost

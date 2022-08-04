@@ -4,6 +4,7 @@ import bg.softuni.FindYourHome.model.dtos.CreateOfferDTO;
 import bg.softuni.FindYourHome.model.dtos.OfferDetailDTO;
 import bg.softuni.FindYourHome.model.dtos.SearchOfferDTO;
 import bg.softuni.FindYourHome.model.entity.*;
+import bg.softuni.FindYourHome.model.enums.RoleEnum;
 import bg.softuni.FindYourHome.model.error.ObjectNotFoundException;
 import bg.softuni.FindYourHome.model.mapper.OfferMapper;
 import bg.softuni.FindYourHome.repository.*;
@@ -84,5 +85,28 @@ public class OfferService {
     public List<OfferDetailDTO> searchOffer(SearchOfferDTO searchOfferDTO) {
         return this.offerRepository.findAll(new OfferSpecification(searchOfferDTO)).
                 stream().map(offerMapper::offerEntityToOfferDetailDTO).collect(Collectors.toList());
+    }
+
+    public boolean isOwner(String userName, Long offerId) {
+
+        boolean isOwner = offerRepository.
+                findById(offerId).
+                filter(o -> o.getSeller().getEmail().equals(userName)).
+                isPresent();
+
+        if (isOwner) {
+            return true;
+        }
+
+        return userRepository.
+                findByEmail(userName).
+                filter(this::isAdmin).
+                isPresent();
+    }
+
+    private boolean isAdmin(UserEntity user) {
+        return user.getRoles().
+                stream().
+                anyMatch(r -> r.getRole() == RoleEnum.ADMIN);
     }
 }

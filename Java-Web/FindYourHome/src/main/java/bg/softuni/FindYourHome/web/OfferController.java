@@ -11,6 +11,7 @@ import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -99,7 +100,9 @@ public class OfferController {
 
         return "details";
     }
-    @DeleteMapping("/details/delete/{id}")
+
+    @PreAuthorize("isOwner(#id)")
+    @DeleteMapping("/all-offers/details/delete/{id}")
     public String removeOffer(@PathVariable Long id) {
 
         offerService.removeOffer(id);

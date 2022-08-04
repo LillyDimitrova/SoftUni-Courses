@@ -38,7 +38,7 @@ public class SecurityConfiguration {
                 // pages available only for admins
                         antMatchers("/pages/admins").hasRole(RoleEnum.ADMIN.name()).
                         antMatchers("/users/remove/{id}").hasRole(RoleEnum.ADMIN.name()).
-                        antMatchers("/details/delete/{id}").hasRole(RoleEnum.ADMIN.name()).
+//                        antMatchers("/details/delete/{id}").hasRole(RoleEnum.ADMIN.name()).
 
                 // all other pages are available for logger in users
                         anyRequest().
