@@ -15,7 +15,7 @@
                     <div class="text-center"><img src="/img/profilePic.jpg" width="100" class="rounded-circle"></div>
                     <div class="text-center mt-3" th:object="${user}">
                         <h5 class="mt-4 mb-0">Full name</h5>
-                        <span th:text="${#authentication.principal.fullName}">UI/UX Designer</span>
+                        <span th:text="${user.getFullName()}">UI/UX Designer</span>
                     <ul class="offer-details list-group list-group-flush">
                             <h5 class="mt-2 mb-0">Username</h5>
                             <span th:text="*{username}">UI/UX Designer</span>

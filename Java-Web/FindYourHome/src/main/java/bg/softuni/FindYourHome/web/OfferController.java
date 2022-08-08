@@ -31,7 +31,7 @@ public class OfferController {
             sort = "price",
             direction = Sort.Direction.ASC,
             page = 0,
-            size = 3) Pageable pageable) {
+            size = 5) Pageable pageable) {
         model.addAttribute("offers", offerService.getAllOffers(pageable));
         return "all-offers";
     }
@@ -44,7 +44,7 @@ public class OfferController {
 
     @GetMapping("/offer-add")
     public String addOffers(){
-        return "/offer-add";
+        return "offer-add";
     }
 
     @PostMapping("offer-add")

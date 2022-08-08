@@ -48,7 +48,7 @@ public class OfferControllerIT {
     @Autowired
     private TestDataUtils testDataUtils;
 
-    private UserEntity testUser, testAdmin;
+    private UserEntity testUser;
 
 
 
@@ -71,7 +71,7 @@ public class OfferControllerIT {
     void testAddOfferShown() throws Exception {
         mockMvc.perform(get("/offer-add")).
                 andExpect(status().isOk()).
-                andExpect(view().name("/offer-add"));
+                andExpect(view().name("offer-add"));
     }
 
 

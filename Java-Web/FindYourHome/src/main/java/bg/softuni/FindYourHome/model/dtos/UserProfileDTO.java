@@ -21,6 +21,9 @@ public class UserProfileDTO {
         this.countOfOffers = countOfOffers;
     }
 
+    public String getFullName() {
+        return getFirstName() + " " + getLastName();
+    }
     public UserProfileDTO setUsername(String username) {
         this.username = username;
         return this;
