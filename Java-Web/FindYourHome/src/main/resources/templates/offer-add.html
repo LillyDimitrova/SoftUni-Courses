@@ -41,7 +41,7 @@
         </div>
         <div class="form-group">
             <div class="label-holder textCol d-flex justify-content-center">
-                <label for="city" class="h4 mb-2 text-white">city</label>
+                <label for="city" class="h4 mb-2 text-white">City</label>
             </div>
             <input type="text"
                    class="form-control"
@@ -91,15 +91,15 @@
         </div>
         <div class="form-group">
             <div class="label-holder text-white textCol d-flex justify-content-center">
-                <label for="image" class="h4 mb-2">image</label>
+                <label for="imageUrl" class="h4 mb-2">imageUrl</label>
             </div>
             <input type="text"
                    class="form-control"
-                   id="image"
+                   id="imageUrl"
                    th:field="*{imageUrl}"
                    th:errorclass="bg-danger"
                    name="performer"/>
-            <small th:if="${#fields.hasErrors('description')}" th:errors="*{imageUrl}">type="text" class="form-control"</small>
+            <small th:if="${#fields.hasErrors('imageUrl')}" th:errors="*{imageUrl}">type="text" class="form-control"</small>
         </div>
 
         <div class="button-holder d-flex justify-content-center">

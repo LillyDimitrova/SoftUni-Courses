@@ -5,7 +5,7 @@ import bg.softuni.FindYourHome.model.dtos.UserRegistrationDTO;
 import bg.softuni.FindYourHome.model.entity.RoleEntity;
 import bg.softuni.FindYourHome.model.entity.UserEntity;
 import bg.softuni.FindYourHome.model.enums.RoleEnum;
-import bg.softuni.FindYourHome.model.error.ObjectNotFoundException;
+import bg.softuni.FindYourHome.exception.ObjectNotFoundException;
 import bg.softuni.FindYourHome.model.mapper.UserMapper;
 import bg.softuni.FindYourHome.repository.RoleEntityRepository;
 import bg.softuni.FindYourHome.repository.UserRepository;
@@ -17,7 +17,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -103,7 +102,7 @@ public class UserService {
 
     @Cacheable("users")
     public UserEntity getCurrentUser(UserDetails userDetails) {
-        LOGGER.info("Getting student by name {}.", userDetails.getUsername());
+        LOGGER.info("Getting user by name {}.", userDetails.getUsername());
        return userRepository.findByEmail(userDetails.getUsername()).
                 orElseThrow();
     }
@@ -116,7 +115,7 @@ public class UserService {
     }
 
     public void removeUser(Long id) {
-        UserEntity user = userRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException(id));
+        UserEntity user = userRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("User with id " + id + " is not found."));
         userRepository.delete(user);
     }
 }

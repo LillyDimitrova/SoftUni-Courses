@@ -20,7 +20,7 @@ public class CreateOfferDTO {
 
     @NotNull(message = "Please choose city!")
     private String city;
-    @NotEmpty(message = "Add a photo!")
+
     private String imageUrl;
     @NotNull(message = "Price must be positive number!")
     @Positive

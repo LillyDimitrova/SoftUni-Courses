@@ -38,17 +38,17 @@ public class RegistrationControllerIT {
     @Test
     void testUserRegistration() throws Exception {
         mockMvc.perform(post("/users/register").
-                        param("email", "anna@example.com").
                         param("username", "anna").
                         param("firstName", "Anna").
                         param("lastName", "Petrova").
+                        param("email", "anna@example.com").
                         param("password", "topsecret").
                         param("confirmPassword", "topsecret").
                         cookie(new Cookie("lang", Locale.ENGLISH.getLanguage())).
                         with(csrf())
                 ).
                 andExpect(status().is3xxRedirection()).
-                andExpect(redirectedUrl("/"));
+                andExpect(redirectedUrl("http://localhost/users/login"));
 
         verify(mockEmailService).
                 sendRegistrationEmail("anna@example.com",

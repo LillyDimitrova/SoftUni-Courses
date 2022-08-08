@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Table(name = "offers")
 public class OfferEntity extends BaseEntity{
 
-    @Column(columnDefinition = "TEXT")
+    @Lob
     private String description;
 
     @ManyToOne
@@ -39,7 +39,7 @@ public class OfferEntity extends BaseEntity{
 
     private Instant instant;
 
-    @Column(columnDefinition = "LONGTEXT")
+    @Lob
     private String imageUrl;
 
     public OfferEntity() {

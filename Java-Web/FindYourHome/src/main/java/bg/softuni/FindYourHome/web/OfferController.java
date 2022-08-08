@@ -3,11 +3,7 @@ package bg.softuni.FindYourHome.web;
 import bg.softuni.FindYourHome.model.dtos.CreateOfferDTO;
 import bg.softuni.FindYourHome.model.dtos.OfferDetailDTO;
 import bg.softuni.FindYourHome.model.dtos.SearchOfferDTO;
-import bg.softuni.FindYourHome.model.entity.OfferEntity;
-import bg.softuni.FindYourHome.model.error.ObjectNotFoundException;
 import bg.softuni.FindYourHome.service.OfferService;
-import bg.softuni.FindYourHome.service.UserService;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -52,7 +48,7 @@ public class OfferController {
     }
 
     @PostMapping("offer-add")
-    public String addOffers(@Valid CreateOfferDTO createOfferDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes,  @AuthenticationPrincipal UserDetails userDetails, Model model) {
+    public String addOffers(@Valid CreateOfferDTO createOfferDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes,  @AuthenticationPrincipal UserDetails userDetails) {
 
 
         if (bindingResult.hasErrors()){
@@ -60,13 +56,18 @@ public class OfferController {
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.createOfferDTO", bindingResult);
 
             return "redirect:/offer-add";
-        } else {
-             offerService.create(createOfferDTO, userDetails);
-            OfferDetailDTO offerDetailDTO = offerService.getCurrentNewOffer();
-            model.addAttribute("newOffer",offerDetailDTO);
-
-            return "added-offer";
         }
+             offerService.create(createOfferDTO, userDetails);
+
+
+            return "redirect:/added-offer";
+
+    }
+    @GetMapping("added-offer")
+    public String addedOffer(Model model) {
+        OfferDetailDTO offerDetailDTO = offerService.getCurrentNewOffer();
+        model.addAttribute("newOffer",offerDetailDTO);
+        return "added-offer";
     }
 
     @GetMapping("/all-offers/search")
@@ -103,7 +104,7 @@ public class OfferController {
 
     @PreAuthorize("isOwner(#id)")
     @DeleteMapping("/all-offers/details/delete/{id}")
-    public String removeOffer(@PathVariable Long id) {
+    public String delete(@PathVariable Long id) {
 
         offerService.removeOffer(id);
         return "redirect:/all-offers";
