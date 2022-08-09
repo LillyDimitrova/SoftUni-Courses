@@ -13,30 +13,6 @@ import java.util.Properties;
 @PropertySource("classpath:application.yml")
 public class MailConfig {
 
-//    @Bean
-//    public JavaMailSender javaMailSender(
-//            @Value("${mail.host}") String mailHost,
-//            @Value("${mail.port}") Integer mailPort,
-//            @Value("${mail.username}") String userName,
-//            @Value("${mail.password}") String password
-//
-//    ) {
-//        JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
-//        javaMailSender.setHost(mailHost);
-//        javaMailSender.setPort(mailPort);
-//        javaMailSender.setUsername(userName);
-//        javaMailSender.setPassword(password);
-//        javaMailSender.setJavaMailProperties(mailProperties());
-//
-//        return javaMailSender;
-//    }
-//
-//    private Properties mailProperties() {
-//        Properties properties = new Properties();
-//        properties.getProperty("mail.smtp.auth", "true");
-//        properties.getProperty("mail.transport.protocol", "smtp");
-//        return properties;
-//    }
 @Value("${spring.mail.protocol}")
 private String protocol;
     @Value("${spring.mail.host}")

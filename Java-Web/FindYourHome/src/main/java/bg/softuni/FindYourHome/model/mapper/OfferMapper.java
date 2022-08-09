@@ -13,5 +13,4 @@ public interface OfferMapper {
 
     OfferDetailDTO offerEntityToOfferDetailDTO(OfferEntity offer);
 
-
 }

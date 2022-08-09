@@ -1,6 +1,5 @@
 package bg.softuni.FindYourHome.model.dtos;
 
-import bg.softuni.FindYourHome.model.entity.CityEntity;
 import bg.softuni.FindYourHome.model.enums.CategoryEnum;
 import bg.softuni.FindYourHome.model.enums.TypeHouseEnum;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -21,6 +20,7 @@ public class CreateOfferDTO {
     @NotNull(message = "Please choose city!")
     private String city;
 
+    @NotNull(message = "Please add picture!")
     private String imageUrl;
     @NotNull(message = "Price must be positive number!")
     @Positive

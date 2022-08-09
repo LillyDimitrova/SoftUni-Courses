@@ -19,7 +19,7 @@
         <select th:field="*{type}" th:errorclass="bg-danger" class="browser-default custom-select" id="type" name="type">
             <option value="">Select type</option>
             <option th:each="s : ${T(bg.softuni.FindYourHome.model.enums.TypeHouseEnum).values()}"
-                    th:text="${s}" th:value="${s}">Type</option>
+                    th:text="${s}" th:value="${s}">Type House</option>
 
         </select>
         <small th:if="${#fields.hasErrors('type')}" th:errors="*{type}">type="text" class="form-control"</small>

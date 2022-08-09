@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -44,7 +45,7 @@ public class OfferService {
     this.cityService = cityService;
 }
     OfferEntity offer = new OfferEntity();
-    public boolean create( CreateOfferDTO createOfferDTO, UserDetails userDetails) {
+    public boolean create(CreateOfferDTO createOfferDTO, UserDetails userDetails) {
          offer = offerMapper.addOfferDtoToOfferEntity(createOfferDTO);
 
         CityEntity city = cityService.getCityByName(createOfferDTO.getCity());
@@ -109,4 +110,5 @@ public class OfferService {
                 stream().
                 anyMatch(r -> r.getRole() == RoleEnum.ADMIN);
     }
+
 }

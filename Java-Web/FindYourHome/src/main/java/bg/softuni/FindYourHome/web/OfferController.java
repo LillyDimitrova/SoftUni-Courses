@@ -1,5 +1,6 @@
 package bg.softuni.FindYourHome.web;
 
+import bg.softuni.FindYourHome.exception.ObjectNotFoundException;
 import bg.softuni.FindYourHome.model.dtos.CreateOfferDTO;
 import bg.softuni.FindYourHome.model.dtos.OfferDetailDTO;
 import bg.softuni.FindYourHome.model.dtos.SearchOfferDTO;
@@ -48,7 +49,7 @@ public class OfferController {
     }
 
     @PostMapping("offer-add")
-    public String addOffers(@Valid CreateOfferDTO createOfferDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes,  @AuthenticationPrincipal UserDetails userDetails) {
+    public String addOffers(@Valid CreateOfferDTO createOfferDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes, @AuthenticationPrincipal UserDetails userDetails) {
 
 
         if (bindingResult.hasErrors()){
@@ -63,7 +64,7 @@ public class OfferController {
             return "redirect:/added-offer";
 
     }
-    @GetMapping("added-offer")
+    @GetMapping("/added-offer")
     public String addedOffer(Model model) {
         OfferDetailDTO offerDetailDTO = offerService.getCurrentNewOffer();
         model.addAttribute("newOffer",offerDetailDTO);

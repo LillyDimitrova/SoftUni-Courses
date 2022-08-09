@@ -51,4 +51,5 @@ public class OfferMapperImpl implements OfferMapper {
 
         return offerDetailDTO;
     }
+
 }
