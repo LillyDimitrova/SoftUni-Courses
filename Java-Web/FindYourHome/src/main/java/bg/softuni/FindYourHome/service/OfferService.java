@@ -111,4 +111,8 @@ public class OfferService {
                 anyMatch(r -> r.getRole() == RoleEnum.ADMIN);
     }
 
+    public Integer getCurrentOffersCount() {
+        List<OfferEntity> currentOffer = offerRepository.findAll();
+        return currentOffer.size();
+    }
 }

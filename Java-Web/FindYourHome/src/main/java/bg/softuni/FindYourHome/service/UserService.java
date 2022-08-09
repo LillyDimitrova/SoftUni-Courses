@@ -118,6 +118,11 @@ public class UserService {
         UserEntity user = userRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("User with id " + id + " is not found."));
         userRepository.delete(user);
     }
+
+    public Integer getCurrentUsersCount() {
+        List<UserEntity> currentUser = userRepository.findAll();
+        return currentUser.size();
+    }
 }
 
 
