@@ -96,9 +96,10 @@ public class OfferController {
     }
 
     @GetMapping("/all-offers/details/{id}")
-    public String getOfferDetail(@PathVariable("id") Long id, Model model)  {
+    public String getOfferDetail(@PathVariable("id") Long id, Model model,@AuthenticationPrincipal UserDetails userDetails)  {
 
         model.addAttribute("offer", offerService.getOfferById(id));
+        model.addAttribute("isOwner",offerService.isOwner(userDetails.getUsername(),id));
 
         return "details";
     }

@@ -45,7 +45,7 @@ public class OfferMapperImpl implements OfferMapper {
                 .setYearOfConstruction(offer.getYearOfConstruction())
                 .setImageUrl(offer.getImageUrl())
                 .setId(offer.getId())
-                .setSeller(offer.getSeller().getUsername())
+                .setSeller(offer.getSeller().getFirstName() + " " + offer.getSeller().getLastName())
                 .setAddedOn(offer.getInstant())
                 .setCity(offer.getCity().getName());
 

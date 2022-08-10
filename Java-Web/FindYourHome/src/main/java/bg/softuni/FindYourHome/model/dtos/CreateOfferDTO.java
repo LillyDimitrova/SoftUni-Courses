@@ -26,6 +26,7 @@ public class CreateOfferDTO {
     @Positive
     private BigDecimal price;
 
+    @NotNull(message = "Please add year of construction!")
     @PastOrPresent
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate yearOfConstruction;
