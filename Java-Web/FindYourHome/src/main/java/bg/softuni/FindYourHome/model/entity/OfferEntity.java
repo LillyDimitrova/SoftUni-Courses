@@ -14,6 +14,7 @@ import java.time.LocalDate;
 public class OfferEntity extends BaseEntity{
 
     @Lob
+    @Column(nullable = false)
     private String description;
 
     @ManyToOne
@@ -40,6 +41,7 @@ public class OfferEntity extends BaseEntity{
     private Instant instant;
 
     @Lob
+    @Column(nullable = false)
     private String imageUrl;
 
     public OfferEntity() {

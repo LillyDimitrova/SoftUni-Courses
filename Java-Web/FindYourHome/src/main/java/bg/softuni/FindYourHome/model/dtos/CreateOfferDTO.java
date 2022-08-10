@@ -17,7 +17,7 @@ public class CreateOfferDTO {
     @NotNull(message = "Please choose category!")
     private CategoryEnum category;
 
-    @NotNull(message = "Please choose city!")
+    @NotBlank(message = "Please choose city!")
     private String city;
 
     @NotNull(message = "Please add picture!")
