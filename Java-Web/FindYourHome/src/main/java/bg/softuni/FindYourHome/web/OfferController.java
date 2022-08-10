@@ -108,6 +108,6 @@ public class OfferController {
     public String delete(@PathVariable Long id) {
 
         offerService.removeOffer(id);
-        return "redirect:/all-offers";
+        return "redirect:/my-offers";
     }
 }
